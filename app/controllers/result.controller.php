@@ -3,6 +3,7 @@ namespace trackle;
 
 use DateTime;
 use JetBrains\PhpStorm\ArrayShape;
+use trackle\Exceptions\CantCreateResultException;
 use trackle\Exceptions\CantCreateSpotException;
 use PDO;
 
@@ -18,12 +19,12 @@ class ResultController {
    * @param int $spotID_raw
    * @return Result
    */
-  public function getSingle(int $spotID_raw): Spot {
+  public function getSingle(int $spotID_raw): Result {
     $spotID = filter_var($spotID_raw, FILTER_SANITIZE_NUMBER_INT);
 
     $spot = $this->app->db->prepare("
       SELECT *
-      FROM `spots`
+      FROM `results`
       WHERE `id` = :id
     ");
 
@@ -36,7 +37,6 @@ class ResultController {
 
   /**
    * @param int $userID
-   * @param array $options
    * @return Result[]
    */
   public function getFromUser(int $userID): array {
@@ -65,93 +65,74 @@ class ResultController {
       $this->app->db
     ]);
   }
-  
+
   /**
-   * @param string $name
-   * @param string $lat
-   * @param string $lon
-   * @param string $description
-   * @param Group $group
-   * @param Person|null $user
+   * @param int $puzzle_no The puzzle's number e.g. 205
+   * @param string $guesses_no The number of attempts until guessed (1-6 or X if it wasn't guessed)
+   * @param array $guess_data The array of guess lines - (X - not present, Y - wrong place, G - right place)
+   * @param User|null $user The user to create it under - if not supplied, create under the logged in user
    * @return string|bool
-   * @throws CantCreateSpotException
+   * @throws CantCreateResultException
    */
-  public function create(string $name, string $lat, string $lon, string $description, Group $group, Person $user = null): string|bool {
+  public function create(int $puzzle_no, string $guesses_no, array $guess_data, User $user = null): string|bool {
 
     if (!$user) {
       $user = $this->app->personController->getMe();
     }
 
     $cleandata = [
-      "name" => filter_var($name, FILTER_SANITIZE_STRING),
-      "lat" => filter_var($lat, FILTER_SANITIZE_STRING),
-      "lon" => filter_var($lon, FILTER_SANITIZE_STRING),
-      "description" => filter_var($description, FILTER_SANITIZE_STRING)
+      "puzzle_no" => filter_var($puzzle_no, FILTER_SANITIZE_NUMBER_INT),
+      "guesses_no" => filter_var($guesses_no, FILTER_SANITIZE_STRING)
     ];
-    
-    $timestamp = (new DateTime())
-      ->format('Y-m-d G:i:s');
 
     //Includes arbitrary status sort order
     $spot = $this->app->db->prepare("
-      INSERT INTO `spots`
+      INSERT INTO `results`
        (`id`,
-       `userid`,
-       `groupid`,
-       `name`,
-       `lat`,
-       `lon`,
-       `description`,
-       `tags`,
-       `created`,
-       `updated`,
-       `privacy`,
-       `deleted`)
+       `user_id`,
+       `puzzle_no`,
+       `guesses_no`,
+       `guess_data`)
       VALUES
         (NULL,
         :user,
-        :group,
-        :name,
-        :lat,
-        :lon,
-        :desc,
-        NULL,
-        :time,
-        :time,
-        '0',
-        '0')");
+        :puzzle_no,
+        :guesses_no,
+        :guess_data)");
 
     
     if ($spot->execute([
       ':user' => $user->id(),
-      ':group' => $group->id(),
-      ':name' => $cleandata['name'],
-      ':lat' => $cleandata['lat'],
-      ':lon' => $cleandata['lon'],
-      ':desc' => $cleandata['description'],
-      ':time' => $timestamp
+      ':puzzle_no' => $cleandata['puzzle_no'],
+      ':guesses_no' => $cleandata['guesses_no'],
+      ':guess_data' => serialize($guess_data)
     ])) {
       return $this->app->db->lastInsertId();
     } else {
-      throw new CantCreateSpotException("Unable to create spot ".$cleandata['name']);
+      throw new CantCreateResultException("Unable to create spot ".$cleandata['name']);
     }
   }
 
-  #[ArrayShape(["puzzle_no" => "string", "guesses_no" => "string", "lines" => "array"])]
+  #[ArrayShape([
+    "puzzle_no" => "string",
+    "guesses_no" => "string",
+    "lines" => "array"])]
   public static function parseFromShare($shareString): array {
 
+    //Split the share text into lines of an array and remove blank ones
     $pieces = array_filter(preg_split("/\r\n|\n|\r/", $shareString));
 
+    //Splits the first line into array pieces
     $info = explode(' ', $pieces[0]);
+
+    //Remove the first line from the $pieces array, leaving only the guess lines, and reinitialise the array keys
     unset($pieces[0]);
     $pieces = array_values($pieces);
 
     $lines = [];
-
     foreach($pieces as $line) {
 
       //if it doesn't contain emojis, ignore the line.
-
       if (
         str_contains($line, '⬛') ||
         str_contains($line, '⬜') ||

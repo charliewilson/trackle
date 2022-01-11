@@ -63,9 +63,6 @@ class PageController {
   //INDEX
   public function indexGet() {
 
-    $this->app->resultController::parseFromShare("hello");
-    die();
-
     if ($this->app->auth->isLoggedIn()){
       header("Location: /home");
     } else {
