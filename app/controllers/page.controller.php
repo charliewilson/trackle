@@ -1,5 +1,5 @@
 <?php
-namespace ledge;
+namespace trackle;
 
 use Delight\Auth\AmbiguousUsernameException;
 use Delight\Auth\AuthError;
@@ -10,7 +10,7 @@ use Delight\Auth\TooManyRequestsException;
 
 use Delight\Auth\UnknownUsernameException;
 
-use ledge\Exceptions\CantCreateSpotException;
+use trackle\Exceptions\CantCreateSpotException;
 use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
 use Twig\Error\SyntaxError;
@@ -62,6 +62,10 @@ class PageController {
   
   //INDEX
   public function indexGet() {
+
+    $this->app->resultController::parse("hello");
+    die();
+
     if ($this->app->auth->isLoggedIn()){
       header("Location: /home");
     } else {
@@ -123,12 +127,22 @@ class PageController {
   //HOMEPAGE
   public function homeGet() {
     if ($this->app->auth->isLoggedIn()){
+
+$input = <<<WORDLE
+Wordle 204 4/6
+
+⬜⬜🟨⬜⬜
+⬜🟩⬜🟨🟨
+⬜🟩🟩⬜🟩
+🟩🟩🟩🟩🟩
+WORDLE;
+
+
+
       try {
-        echo $this->app->twig->render('home/home.twig', [
-          "spots" => $this->app->spotController->getAll(),
-          "groups" => $this->app->groupController->getAll(),
-          "users" => $this->app->personController->getAll(),
-          "me" => $this->app->personController->getMe()
+        echo $this->app->twig->render('parse.twig', [
+          "input" => $input,
+          "parsed" => $this->app->resultController::parse($input)
         ]);
       } catch (LoaderError | RuntimeError | SyntaxError $e) {
         $this->errorMessage($e->getMessage());
@@ -144,7 +158,7 @@ class PageController {
     if ($this->app->auth->isLoggedIn()){
       try {
         echo $this->app->twig->render('groups/group.twig', [
-          "group" => $this->app->groupController->getBySlug($params['name'])
+//          "group" => $this->app->groupController->getBySlug($params['name'])
         ]);
       } catch (LoaderError | RuntimeError | SyntaxError $e) {
         $this->errorMessage($e->getMessage());
@@ -176,7 +190,7 @@ class PageController {
     if ($this->app->auth->isLoggedIn()){
       try {
         $me = $this->app->personController->getMe();
-        $spot = $this->app->spotController->getSingle($params['id']);
+        $spot = $this->app->resultController->getSingle($params['id']);
         
         if ($me->hasAccessToSpot($spot)) {
           echo $this->app->twig->render('spots/spot.twig', [
@@ -198,7 +212,7 @@ class PageController {
     if ($this->app->auth->isLoggedIn()){
       try {
         echo $this->app->twig->render('spots/addspot.twig',[
-          "groups" => $this->app->groupController->getFromUser($this->app->auth->id())
+//          "groups" => $this->app->groupController->getFromUser($this->app->auth->id())
         ]);
       } catch (LoaderError | RuntimeError | SyntaxError $e) {
         $this->errorMessage($e->getMessage());
@@ -225,7 +239,7 @@ class PageController {
       try {
         $create = $this->app->spotController->create($name, $lat, $lon, $description, $group, $user);
         header("Location: /s/".$create);
-      } catch (CantCreateSpotException) {
+      } catch (Exception) {
         $this->errorMessage("Spot cannot be created!");
       }
 

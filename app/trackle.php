@@ -1,10 +1,9 @@
 <?php
 
-namespace ledge;
+namespace trackle;
 
 require_once("vendor/autoload.php");
 require_once("config.php");
-//require_once("exceptions.php");
 require_once("objects/objects.php");
 
 use JetBrains\PhpStorm\ArrayShape;
@@ -32,8 +31,7 @@ class App {
   public AppData $appData;
   
   public PageController $pageController;
-  public SpotController $spotController;
-  public GroupController $groupController;
+  public ResultController $resultController;
   public PersonController $personController;
 
   function __construct(PDO $db = null) {
@@ -59,8 +57,7 @@ class App {
     $this->appData = new appData;
     
     $this->pageController = new PageController($this);
-    $this->spotController = new SpotController($this);
-    $this->groupController = new GroupController($this);
+    $this->resultController = new ResultController($this);
     $this->personController = new PersonController($this);
   }
 
@@ -72,7 +69,7 @@ class AppData {
   public string $version;
 
   function __construct() {
-    $this->appName = 'ledge.club';
+    $this->appName = 'trackle';
     $this->version = '1.0';
   }
 
@@ -152,11 +149,10 @@ class User {
           SET `data` = :data
           WHERE `id` = :id
         ");
-        $res = $finaldata->execute([
+        return $finaldata->execute([
           ':data' => base64_encode(serialize($data)),
           ':id' => filter_var($userid, FILTER_SANITIZE_NUMBER_INT),
         ]);
-        return ($res) ? true : false;
       } else {
         return false;
       }

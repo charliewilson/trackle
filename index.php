@@ -6,12 +6,12 @@ error_reporting(E_ALL);
 date_default_timezone_set('Europe/London');
 
 require "vendor/autoload.php";
-require "app/Exceptions.php";
-require "app/ledge.php";
+require "app/exceptions.php";
+require "app/trackle.php";
 require "app/controllers/controllers.php";
 require "app/objects/objects.php";
 
-use ledge\App;
+use trackle\App;
 
 $app = new App;
 

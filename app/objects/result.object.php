@@ -1,8 +1,8 @@
 <?php
-namespace ledge;
+namespace trackle;
 use PDO;
 
-class Spot {
+class Result {
   
   private $app;
   
@@ -25,11 +25,7 @@ class Spot {
   public function user() {
     return $this->app->personController->getSingle($this->userid);
   }
-  
-  public function group() {
-    return $this->app->groupController->getSingle($this->groupid);
-  }
-  
+
   public function name() {
     return $this->name;
   }

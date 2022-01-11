@@ -1,5 +1,5 @@
 <?php
-namespace ledge;
+namespace trackle;
 use PDO;
 
 class Person {
@@ -40,55 +40,12 @@ class Person {
   public function username() {
     return $this->username;
   }
-  
-  /**
-   * @return bool|Group[]
-   */
-  public function groups() {
-    return $this->app->groupController->getFromUser($this->id());
-  }
-  
+
   /**
    * @return Spot[]
    */
-  public function spots() {
-    return $this->app->spotController->getFromUser($this->id());
-  }
-  
-  /**
-   * @param Spot $spot
-   * @return bool
-   */
-  public function hasAccessToSpot(Spot $spot) {
-    
-    $gid = $spot->group()->id();
-    $match = false;
-    
-    foreach ($this->groups() as $group) {
-      if ($group->id() == $gid) {
-        $match = true;
-      }
-    }
-    
-    return $match;
-  }
-  
-  /**
-   * @param Group $group
-   * @return bool
-   */
-  public function isInGroup(Group $group) {
-    
-    $gid = $group->id();
-    $match = false;
-    
-    foreach ($this->groups() as $group) {
-      if ($group->id() == $gid) {
-        $match = true;
-      }
-    }
-    
-    return $match;
+  public function results() {
+    return $this->app->resultController->getFromUser($this->id());
   }
 
 }

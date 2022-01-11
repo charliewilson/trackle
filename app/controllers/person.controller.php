@@ -1,5 +1,5 @@
 <?php
-namespace ledge;
+namespace trackle;
 
 use PDO;
 
@@ -23,7 +23,7 @@ class PersonController {
 
     $person->execute([':id' => $this->app->auth->id()]);
 
-    return $person->fetchObject('\ledge\Person', [
+    return $person->fetchObject('\trackle\Person', [
       $this->app->db
     ]);
   }
@@ -43,7 +43,7 @@ class PersonController {
 
     $person->execute([':id' => $personID]);
 
-    return $person->fetchObject('\ledge\Person', [
+    return $person->fetchObject('\trackle\Person', [
       $this->app->db
     ]);
   }
@@ -63,7 +63,7 @@ class PersonController {
 
     $person->execute([':username' => $username]);
 
-    return $person->fetchObject('\ledge\Person', [
+    return $person->fetchObject('\trackle\Person', [
       $this->app->db
     ]);
   }
@@ -90,7 +90,7 @@ class PersonController {
 
     $people->execute();
 
-    $final = $people->fetchAll(PDO::FETCH_CLASS,'\ledge\Person', [
+    $final = $people->fetchAll(PDO::FETCH_CLASS,'\trackle\Person', [
       $this->app->db
     ]);
 

@@ -1,10 +1,10 @@
 <?php
 
-namespace ledge\Exceptions;
+namespace trackle\Exceptions;
 
 use Exception;
 
-class CantCreateSpotException extends Exception {}
+class InvalidShareTextException extends Exception {}
 
 /*
  * TODO: decide implementation (if at all) of below

@@ -1,11 +1,12 @@
 <?php
-namespace ledge;
+namespace trackle;
 
 use DateTime;
-use ledge\Exceptions\CantCreateSpotException;
+use JetBrains\PhpStorm\ArrayShape;
+use trackle\Exceptions\CantCreateSpotException;
 use PDO;
 
-class SpotController {
+class ResultController {
   
   private App $app;
   
@@ -15,7 +16,7 @@ class SpotController {
 
   /**
    * @param int $spotID_raw
-   * @return Spot
+   * @return Result
    */
   public function getSingle(int $spotID_raw): Spot {
     $spotID = filter_var($spotID_raw, FILTER_SANITIZE_NUMBER_INT);
@@ -28,7 +29,7 @@ class SpotController {
 
     $spot->execute([':id' => $spotID]);
 
-    return $spot->fetchObject('\ledge\Spot', [
+    return $spot->fetchObject('\trackle\Result', [
       $this->app->db
     ]);
   }
@@ -59,7 +60,7 @@ class SpotController {
       ':deleted' => ($defaultOptions['includeDeleted']) ? '1' : '0'
     ]);
 
-    $final = $projects->fetchAll(PDO::FETCH_CLASS,'\ledge\Spot', [
+    $final = $projects->fetchAll(PDO::FETCH_CLASS,'\trackle\Result', [
       $this->app->db
     ]);
 
@@ -95,7 +96,7 @@ class SpotController {
       ':deleted' => ($defaultOptions['includeDeleted']) ? '1' : '0'
     ]);
 
-    $final = $projects->fetchAll(PDO::FETCH_CLASS,'\ledge\Spot', [
+    $final = $projects->fetchAll(PDO::FETCH_CLASS,'\trackle\Result', [
       $this->app->db
     ]);
 
@@ -131,7 +132,7 @@ class SpotController {
       ':deleted' => ($defaultOptions['includeDeleted']) ? '1' : '0'
     ]);
 
-    $final = $projects->fetchAll(PDO::FETCH_CLASS,'\ledge\Spot', [
+    $final = $projects->fetchAll(PDO::FETCH_CLASS,'\trackle\Result', [
       $this->app->db
     ]);
 
@@ -207,5 +208,39 @@ class SpotController {
     } else {
       throw new CantCreateSpotException("Unable to create spot ".$cleandata['name']);
     }
+  }
+
+  #[ArrayShape(["puzzle_no" => "string", "guesses_no" => "string", "lines" => "array"])]
+  public static function parseFromShare($shareString): array {
+
+    $pieces = array_filter(preg_split("/\r\n|\n|\r/", $shareString));
+
+    $info = explode(' ', $pieces[0]);
+    unset($pieces[0]);
+    $pieces = array_values($pieces);
+
+    $lines = [];
+
+    foreach($pieces as $line) {
+
+      //Black/White Square - not in word
+      $lineProcessed = str_replace('⬛', 'X', $line);
+      $lineProcessed = str_replace('⬜', 'X', $lineProcessed);
+
+      //Yellow Square - in word; wrong position
+      $lineProcessed = str_replace('🟨', 'Y', $lineProcessed);
+
+      //Green Square - in word; right position
+      $lineProcessed = str_replace('🟩', 'G', $lineProcessed);
+
+      $lines[] = $lineProcessed;
+    }
+
+    return [
+      "puzzle_no" => $info[1],
+      "guesses_no" => explode('/', $info[2])[0],
+      "lines" => $lines
+    ];
+
   }
 }
