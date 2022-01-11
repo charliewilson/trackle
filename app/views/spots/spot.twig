@@ -1,0 +1,22 @@
+{% extends 'base.twig' %}
+{% set title = spot.name %}
+
+{% block main %}
+<h1>{{ spot.name }}</h1>
+<hr>
+<div id="map" style="width:500px; height:350px;"></div>
+  <p>By <a href="/u/{{ spot.user.username }}">{{ spot.user.username }}</a> in <a href="/g/{{ spot.group.slug }}">{{ spot.group.name }}</a></p>
+<p>{{ spot.description }}</p>
+<a href="/home">home</a>
+
+<script>
+  let mymap = L.map('map').setView([{{ spot.lat }}, {{ spot.lon }}], 16);
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 18,
+    tileSize: 256,
+    detectRetina: true
+  }).addTo(mymap);
+  let marker = L.marker([{{  spot.lat }}, {{ spot.lon }}]).addTo(mymap);
+  marker.bindPopup("<strong>{{ spot.name }}<br><a target='_blank' href='https://maps.google.com/maps?q=&layer=c&cbll={{ spot.lat }},{{ spot.lon }}&cbp=11,0,0,0,0\n'>Street View</a></strong>");
+</script>
+{% endblock %}

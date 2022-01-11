@@ -1,0 +1,19 @@
+{
+    "name": "chwilson/ledgeclub",
+    "description": "Private Skate Spot Database",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "charliewilson",
+            "email": "me@charliewilson.co.uk"
+        }
+    ],
+    "require": {
+        "altorouter/altorouter": "^2.0",
+        "delight-im/auth": "^8.3",
+        "vlucas/phpdotenv": "^5.4",
+        "ext-pdo": "*",
+        "twig/twig": "^3.3",
+        "twig/intl-extra": "^3.3"
+    }
+}

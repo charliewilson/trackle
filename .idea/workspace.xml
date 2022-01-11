@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="bf6f46f9-f080-4974-a29a-93b52a10bac6" name="Changes" comment="Cloned from ledge.club">
+      <change afterPath="$PROJECT_DIR$/.htaccess" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/deployment.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/trackle.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Exceptions.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/config.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/controllers/controllers.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/controllers/group.controller.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/controllers/page.controller.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/controllers/person.controller.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/controllers/spot.controller.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/ledge.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/objects/group.object.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/objects/objects.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/objects/person.object.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/objects/spot.object.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/views/404.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/views/base.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/views/error.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/views/groups/group.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/views/home/home.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/views/login/login.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/views/person/person.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/views/spots/addspot.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/views/spots/spot.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/img/crosshair.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example.env" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/install.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings" synchronizationState="SYNCHRONIZE">
+    <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
+    <execution />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration">
+    <include_path>
+      <path value="$PROJECT_DIR$/vendor/symfony/intl" />
+      <path value="$PROJECT_DIR$/vendor/delight-im/base64" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php80" />
+      <path value="$PROJECT_DIR$/vendor/delight-im/auth" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-ctype" />
+      <path value="$PROJECT_DIR$/vendor/delight-im/cookie" />
+      <path value="$PROJECT_DIR$/vendor/vlucas/phpdotenv" />
+      <path value="$PROJECT_DIR$/vendor/composer" />
+      <path value="$PROJECT_DIR$/vendor/phpoption/phpoption" />
+      <path value="$PROJECT_DIR$/vendor/twig/twig" />
+      <path value="$PROJECT_DIR$/vendor/twig/intl-extra" />
+      <path value="$PROJECT_DIR$/vendor/graham-campbell/result-type" />
+      <path value="$PROJECT_DIR$/vendor/altorouter/altorouter" />
+      <path value="$PROJECT_DIR$/vendor/delight-im/http" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-mbstring" />
+      <path value="$PROJECT_DIR$/vendor/delight-im/db" />
+    </include_path>
+  </component>
+  <component name="ProjectId" id="23Y8Ou1mYcHCEIRKr0jOgISWozP" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="true" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="settings.editor.selected.configurable" value="configurable.group.appearance" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="bf6f46f9-f080-4974-a29a-93b52a10bac6" name="Changes" comment="" />
+      <created>1641899635004</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1641899635004</updated>
+      <workItem from="1641899637597" duration="1186000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Cloned from ledge.club" />
+    <option name="LAST_COMMIT_MESSAGE" value="Cloned from ledge.club" />
+  </component>
+</project>

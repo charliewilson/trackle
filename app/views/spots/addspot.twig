@@ -1,0 +1,143 @@
+{% extends 'base.twig' %}
+{% set title = "Add Spot" %}
+
+{% block main %}
+{# TODO: move the below into a separate stylesheet, most likely under 'assets/css' #}
+<style>
+  .leaflet-center {
+    position: absolute;
+    z-index: 1000;
+    pointer-events: none;
+    top: 50%; /* possible because the placeholder's parent is the map */
+    left: 50%; /* possible because the placeholder's parent is the map */
+    transform: translateY(-50%) translateX(-50%); /* using the CSS3 Transform technique */
+    padding-top: 10px;
+    padding-left: 10px;
+  }
+
+  .leaflet-center .leaflet-control {
+    margin-bottom: 10px;
+    margin-right: 10px;
+  }
+
+</style>
+
+<h1>Add Spot</h1>
+<hr>
+<div id="map" style="width:500px; height:350px;"></div>
+
+  <form id="searchform">
+  <label for="searchbox">start point</label><br>
+  <input id="searchbox" type="text" placeholder="searchbox">
+  <input type="submit" id="searchbutton" value="Search">
+  </form>
+
+  <form method="post" action="/s/add">
+    <input id="lat" name="lat" type="hidden">
+    <input id="lon" name="lon" type="hidden">
+
+    <p>
+      <label for="name">Name</label><br>
+      <input id="name" name="name">
+    </p>
+
+    <p>
+      <label for="description">Description</label><br>
+      <textarea id="description" name="description"></textarea>
+    </p>
+
+    <p>
+      <label for="group">Create in</label><br>
+      <select id="group" name="group">
+        {% for group in groups %}
+        <option value="{{ group.id }}">{{ group.name }}</option>
+        {% endfor %}
+      </select>
+    </p>
+
+
+
+    <p>
+      <input type="submit" value="Add">
+    </p>
+  </form>
+
+
+
+
+  <a href="/home">home</a>
+
+<script>
+  let mymap = L.map('map').setView([51.5073219, -0.1276474], 12);
+
+  updateLatLon();
+
+  let mapelement = document.getElementById("map");
+
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 18,
+    tileSize: 256,
+    detectRetina: true
+  }).addTo(mymap);
+
+  L.Control.Watermark = L.Control.extend({
+    onAdd: function() {
+      let img = L.DomUtil.create('img');
+      img.src = '/assets/img/crosshair.png';
+      img.style.width = '32px';
+      return img;
+    },
+    onRemove: function() {
+      // Nothing to do here
+    }
+  });
+
+  // Create additional Control placeholders
+  function addControlPlaceholders(map) {
+    let corners = map._controlCorners,
+      l = 'leaflet-',
+      container = map._controlContainer;
+
+    function createCorner(vSide, hSide) {
+      let className = l + vSide + ' ' + l + hSide;
+
+      corners[vSide + hSide] = L.DomUtil.create('div', className, container);
+    }
+
+    createCorner('center', 'center');
+  }
+  addControlPlaceholders(mymap);
+
+  L.control.watermark = function(opts) {
+    return new L.Control.Watermark(opts);
+  };
+
+  L.control.watermark({ position: 'centercenter' }).addTo(mymap);
+
+
+  async function searchFor(phrase) {
+    const response = await fetch('https://nominatim.openstreetmap.org/search?q='+phrase+'&format=jsonv2&limit=1');
+    return response.json();
+  }
+
+  function updateLatLon() {
+    let latlong = mymap.getCenter();
+    document.getElementById("lat").value = latlong.lat;
+    document.getElementById("lon").value = latlong.lng;
+  }
+
+  function updateMap(lat,lon) {
+    mymap.setView(L.latLng(lat,lon), 16);
+    updateLatLon()
+  }
+
+  mymap.addEventListener('move', updateLatLon);
+
+  document.getElementById("searchform").addEventListener('submit', function(e) {
+    e.preventDefault();
+    let searchphrase = document.getElementById("searchbox").value;
+    searchFor(searchphrase).then(data => updateMap(data[0].lat, data[0].lon));
+  });
+
+</script>
+{% endblock %}
