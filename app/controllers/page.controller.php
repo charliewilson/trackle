@@ -63,7 +63,7 @@ class PageController {
   //INDEX
   public function indexGet() {
 
-    $this->app->resultController::parse("hello");
+    $this->app->resultController::parseFromShare("hello");
     die();
 
     if ($this->app->auth->isLoggedIn()){
@@ -142,7 +142,7 @@ WORDLE;
       try {
         echo $this->app->twig->render('parse.twig', [
           "input" => $input,
-          "parsed" => $this->app->resultController::parse($input)
+          "parsed" => print_r($this->app->resultController::parseFromShare($input),true)
         ]);
       } catch (LoaderError | RuntimeError | SyntaxError $e) {
         $this->errorMessage($e->getMessage());

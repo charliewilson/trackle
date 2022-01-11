@@ -35,108 +35,35 @@ class ResultController {
   }
 
   /**
-   * @param array $options
-   * @return Spot[]
-   */
-  public function getAll(array $options = []): array {
-
-    $defaultOptions = [
-      "includeDeleted" => false,
-      "flipArray" => false
-    ];
-    foreach($options as $option=>$value) {
-      if (isset($defaultOptions[$option])) {
-        $defaultOptions[$option] = $value;
-      }
-    }
-
-    //Includes arbitrary status sort order
-    $projects = $this->app->db->prepare("
-      SELECT *
-      FROM `spots`
-      WHERE `deleted` = :deleted");
-
-    $projects->execute([
-      ':deleted' => ($defaultOptions['includeDeleted']) ? '1' : '0'
-    ]);
-
-    $final = $projects->fetchAll(PDO::FETCH_CLASS,'\trackle\Result', [
-      $this->app->db
-    ]);
-
-    return ($defaultOptions['flipArray']) ? array_reverse($final) : $final;
-  }
-
-  /**
-   * @param int $groupID
-   * @param array $options
-   * @return Spot[]
-   */
-  public function getFromGroup(int $groupID, array $options = []): array {
-
-    $defaultOptions = [
-      "includeDeleted" => false,
-      "flipArray" => false
-    ];
-    foreach($options as $option=>$value) {
-      if (isset($defaultOptions[$option])) {
-        $defaultOptions[$option] = $value;
-      }
-    }
-
-    //Includes arbitrary status sort order
-    $projects = $this->app->db->prepare("
-      SELECT *
-      FROM `spots`
-      WHERE `groupid` = :groupid
-      AND `deleted` = :deleted");
-
-    $projects->execute([
-      ':groupid' => filter_var($groupID, FILTER_SANITIZE_NUMBER_INT),
-      ':deleted' => ($defaultOptions['includeDeleted']) ? '1' : '0'
-    ]);
-
-    $final = $projects->fetchAll(PDO::FETCH_CLASS,'\trackle\Result', [
-      $this->app->db
-    ]);
-
-    return ($defaultOptions['flipArray']) ? array_reverse($final) : $final;
-  }
-
-  /**
    * @param int $userID
    * @param array $options
-   * @return Spot[]
+   * @return Result[]
    */
-  public function getFromUser(int $userID, array $options = []): array {
+  public function getFromUser(int $userID): array {
 
-    $defaultOptions = [
-      "includeDeleted" => false,
-      "flipArray" => false
-    ];
-    foreach($options as $option=>$value) {
-      if (isset($defaultOptions[$option])) {
-        $defaultOptions[$option] = $value;
-      }
-    }
+//    $defaultOptions = [
+//      "includeDeleted" => false,
+//      "flipArray" => false
+//    ];
+//    foreach($options as $option=>$value) {
+//      if (isset($defaultOptions[$option])) {
+//        $defaultOptions[$option] = $value;
+//      }
+//    }
 
     //Includes arbitrary status sort order
     $projects = $this->app->db->prepare("
       SELECT *
-      FROM `spots`
-      WHERE `userid` = :userid
-      AND `deleted` = :deleted");
+      FROM `results`
+      WHERE `user_id` = :userid");
 
     $projects->execute([
-      ':userid' => filter_var($userID, FILTER_SANITIZE_NUMBER_INT),
-      ':deleted' => ($defaultOptions['includeDeleted']) ? '1' : '0'
+      ':userid' => filter_var($userID, FILTER_SANITIZE_NUMBER_INT)
     ]);
 
-    $final = $projects->fetchAll(PDO::FETCH_CLASS,'\trackle\Result', [
+    return $projects->fetchAll(PDO::FETCH_CLASS,'\trackle\Result', [
       $this->app->db
     ]);
-
-    return ($defaultOptions['flipArray']) ? array_reverse($final) : $final;
   }
   
   /**
@@ -223,17 +150,26 @@ class ResultController {
 
     foreach($pieces as $line) {
 
-      //Black/White Square - not in word
-      $lineProcessed = str_replace('⬛', 'X', $line);
-      $lineProcessed = str_replace('⬜', 'X', $lineProcessed);
+      //if it doesn't contain emojis, ignore the line.
 
-      //Yellow Square - in word; wrong position
-      $lineProcessed = str_replace('🟨', 'Y', $lineProcessed);
+      if (
+        str_contains($line, '⬛') ||
+        str_contains($line, '⬜') ||
+        str_contains($line, '🟨') ||
+        str_contains($line, '🟩')
+      ) {
+        //Black/White Square - not in word
+        $lineProcessed = str_replace('⬛', 'X', $line);
+        $lineProcessed = str_replace('⬜', 'X', $lineProcessed);
 
-      //Green Square - in word; right position
-      $lineProcessed = str_replace('🟩', 'G', $lineProcessed);
+        //Yellow Square - in word; wrong position
+        $lineProcessed = str_replace('🟨', 'Y', $lineProcessed);
 
-      $lines[] = $lineProcessed;
+        //Green Square - in word; right position
+        $lineProcessed = str_replace('🟩', 'G', $lineProcessed);
+
+        $lines[] = $lineProcessed;
+      }
     }
 
     return [

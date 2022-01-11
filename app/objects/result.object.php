@@ -7,38 +7,28 @@ class Result {
   private $app;
   
   private $id;
-  private $userid;
-  private $groupid;
-  private $name;
-  private $lat;
-  private $lon;
-  private $description;
-  
+  private $user_id;
+  private $puzzle_no;
+  private $guesses_no;
+  private $guess_data;
+
   function __construct(PDO $dbInstance = null) {
     $this->app = new App($dbInstance);
   }
 
-  public function id() {
-    return $this->id;
+  public function id(): int {
+    return (int)$this->id;
   }
 
-  public function user() {
-    return $this->app->personController->getSingle($this->userid);
+  public function user(): Person {
+    return $this->app->personController->getSingle($this->user_id);
   }
 
-  public function name() {
-    return $this->name;
+  public function puzzleNo(): int {
+    return (int)$this->puzzle_no;
   }
-  
-  public function lat() {
-    return $this->lat;
-  }
-  
-  public function lon() {
-    return $this->lon;
-  }
-  
-  public function description() {
-    return $this->description;
+
+  public function guessesNo(): string|int {
+    return ($this->guesses_no === "X") ? "X" : (int)$this->guesses_no;
   }
 }
