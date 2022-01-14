@@ -10,7 +10,6 @@ use Delight\Auth\TooManyRequestsException;
 
 use Delight\Auth\UnknownUsernameException;
 
-use trackle\Exceptions\CantCreateSpotException;
 use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
 use Twig\Error\SyntaxError;
@@ -62,12 +61,8 @@ class PageController {
   
   //INDEX
   public function indexGet() {
-
-    if ($this->app->auth->isLoggedIn()){
-      header("Location: /home");
-    } else {
-      header("Location: /login");
-    }
+    $redirect = ($this->app->auth->isLoggedIn()) ? "home" : "login";
+    header("Location: /".$redirect);
   }
   
   //LOGIN
@@ -137,25 +132,9 @@ WORDLE;
 
 
       try {
-        echo $this->app->twig->render('parse.twig', [
+        echo $this->app->twig->render('home/home.twig', [
           "input" => $input,
           "parsed" => print_r($this->app->resultController::parseFromShare($input),true)
-        ]);
-      } catch (LoaderError | RuntimeError | SyntaxError $e) {
-        $this->errorMessage($e->getMessage());
-      }
-      die();
-    } else {
-      header("Location: /login");
-    }
-  }
-
-  //GROUP
-  public function groupGet($params) {
-    if ($this->app->auth->isLoggedIn()){
-      try {
-        echo $this->app->twig->render('groups/group.twig', [
-//          "group" => $this->app->groupController->getBySlug($params['name'])
         ]);
       } catch (LoaderError | RuntimeError | SyntaxError $e) {
         $this->errorMessage($e->getMessage());
@@ -182,20 +161,16 @@ WORDLE;
     }
   }
 
-  //SPOT
-  public function spotGet($params) {
+  //RESULT
+  public function resultGet($params) {
     if ($this->app->auth->isLoggedIn()){
       try {
         $me = $this->app->personController->getMe();
-        $spot = $this->app->resultController->getSingle($params['id']);
-        
-        if ($me->hasAccessToSpot($spot)) {
-          echo $this->app->twig->render('spots/spot.twig', [
-            "spot" => $spot
-          ]);
-        } else {
-          $this->errorMessage("You do not have access to spot ${params['id']}");
-        }
+        $result = $this->app->resultController->getSingle($params['id']);
+
+        echo $this->app->twig->render('results/result.twig', [
+          "result" => $result
+        ]);
       } catch (LoaderError | RuntimeError | SyntaxError $e) {
         $this->errorMessage($e->getMessage());
       }

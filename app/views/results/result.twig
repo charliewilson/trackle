@@ -1,0 +1,9 @@
+{% extends 'base.twig' %}
+{% set title = result.puzzleNo %}
+
+{% block main %}
+<h1>{{ result.puzzleNo }}</h1>
+<hr>
+  <pre>{{ result.guesses }}</pre>
+<a href="/home">home</a>
+{% endblock %}
