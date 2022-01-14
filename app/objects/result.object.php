@@ -32,7 +32,26 @@ class Result {
     return ($this->guesses_no === "X") ? "X" : (int)$this->guesses_no;
   }
 
-  public function guesses(): bool|string {
-    return print_r(unserialize($this->guess_data), TRUE);
+  public function guesses(): array {
+    return unserialize($this->guess_data);
+  }
+
+  public function toShare(): string {
+    $lines[] = "Wordle ".$this->puzzleNo()." ".$this->guessesNo()."/6";
+
+    foreach($this->guesses() as $guess) {
+
+      $guessProcessed = str_replace('X', '⬛', $guess);
+
+      //Yellow Square - in word; wrong position
+      $guessProcessed = str_replace('Y', '🟨', $guessProcessed);
+
+      //Green Square - in word; right position
+      $guessProcessed = str_replace('G', '🟩', $guessProcessed);
+
+      $lines[] = $guessProcessed;
+    }
+
+    return implode("\n", $lines);
   }
 }

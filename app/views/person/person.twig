@@ -4,17 +4,13 @@
 {% block main %}
   <h1>{{ person.username }}</h1>
   <hr>
-  <p>Groups:</p>
-  <ul>
-    {% for group in person.groups %}
-      <li><a href="/g/{{ group.slug }}">{{ group.name }}</a></li>
+  <p>Results:</p>
+  <div class="results-container">
+    {% for result in results %}
+      <div class="result">
+        <pre>{{ result.toShare }}</pre>
+      </div>
     {% endfor %}
-  </ul>
-  <p>Spots:</p>
-  <ul>
-    {% for spot in person.spots %}
-      <li><a href="/s/{{ spot.id }}">{{ spot.name }}</a></li>
-    {% endfor %}
-  </ul>
+  </div>
   <a href="/home">home</a>
 {% endblock %}

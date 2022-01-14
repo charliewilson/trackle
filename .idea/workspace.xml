@@ -8,11 +8,9 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/controllers/page.controller.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/page.controller.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/objects/result.object.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/objects/result.object.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/base.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/base.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/groups/group.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/home/home.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/home/home.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/spots/addspot.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/results/addresult.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/spots/spot.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/results/result.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/person/person.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/person/person.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/results/result.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/results/result.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -110,6 +108,7 @@
       <workItem from="1641930846447" duration="1302000" />
       <workItem from="1641932249955" duration="1417000" />
       <workItem from="1642176236299" duration="2874000" />
+      <workItem from="1642184633877" duration="3027000" />
     </task>
     <task id="LOCAL-00001" summary="Cloned from ledge.club">
       <created>1641901299367</created>

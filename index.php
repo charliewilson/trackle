@@ -27,11 +27,9 @@ try {
     //Homepage and feed
     ['GET', '/home', 'homeGet'],
     //Spots
-    ['GET', '/r/[i:id]', 'spotGet'],
-    ['GET', '/r/add', 'spotAddGet'],
-    ['POST', '/r/add', 'spotAddPost'],
-    //Groups
-    ['GET', '/g/[:name]', 'groupGet'],
+    ['GET', '/r/[i:id]', 'resultGet'],
+    ['GET', '/r/add', 'resultAddGet'],
+    ['POST', '/r/add', 'resultAddPost'],
     //Users
     ['GET', '/u/[a:name]', 'personGet']
   ]);

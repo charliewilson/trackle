@@ -120,21 +120,21 @@ class PageController {
   public function homeGet() {
     if ($this->app->auth->isLoggedIn()){
 
-$input = <<<WORDLE
-Wordle 204 4/6
-
-⬜⬜🟨⬜⬜
-⬜🟩⬜🟨🟨
-⬜🟩🟩⬜🟩
-🟩🟩🟩🟩🟩
-WORDLE;
-
-
+//
+//$input = <<<WORDLE
+//Wordle 204 4/6
+//
+//⬜⬜🟨⬜⬜
+//⬜🟩⬜🟨🟨
+//⬜🟩🟩⬜🟩
+//🟩🟩🟩🟩🟩
+//WORDLE;
+//
 
       try {
         echo $this->app->twig->render('home/home.twig', [
-          "input" => $input,
-          "parsed" => print_r($this->app->resultController::parseFromShare($input),true)
+          "me" => $this->app->personController->getMe(),
+          "users" => $this->app->personController->getAll()
         ]);
       } catch (LoaderError | RuntimeError | SyntaxError $e) {
         $this->errorMessage($e->getMessage());
@@ -149,8 +149,10 @@ WORDLE;
   public function personGet($params) {
     if ($this->app->auth->isLoggedIn()){
       try {
+        $person = $this->app->personController->getByUsername($params['name']);
         echo $this->app->twig->render('person/person.twig', [
-          "person" => $this->app->personController->getByUsername($params['name'])
+          "person" => $person,
+          "results" => $this->app->resultController->getFromUser($person->id())
         ]);
       } catch (LoaderError | RuntimeError | SyntaxError $e) {
         $this->errorMessage($e->getMessage());
