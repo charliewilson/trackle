@@ -2,7 +2,7 @@
 {% set title = person.username %}
 
 {% block header %}
-  {% if me %}<a class="button" href="/r/add">Add Puzzle</a><a class="button" href="/settings">Settings</a><a class="button" href="/logout">Logout</a>{% else %}<a class="button" href="/register">Register</a><a class="button" href="/login">Login</a>{% endif %}
+  {% if me %}<a class="button" href="/r/add">Add Result</a><a class="button" href="/settings">Settings</a><a class="button" href="/logout">Logout</a>{% else %}<a class="button" href="/login">Login / Register</a>{% endif %}
 {% endblock %}
 
 {% block main %}

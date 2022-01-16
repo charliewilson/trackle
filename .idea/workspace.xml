@@ -4,22 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bf6f46f9-f080-4974-a29a-93b52a10bac6" name="Changes" comment="More theme stuuf">
-      <change afterPath="$PROJECT_DIR$/assets/css/style.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/js/chart.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/trackle.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/trackle.iml" afterDir="false" />
+    <list default="true" id="bf6f46f9-f080-4974-a29a-93b52a10bac6" name="Changes" comment="Almost complete!&#10;&#10; - New user flow, settings, and leaderboard need implementing&#10; - Design of login and add puzzle need implementing">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/controllers/page.controller.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/page.controller.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/controllers/person.controller.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/person.controller.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/controllers/result.controller.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/result.controller.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/exceptions.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/exceptions.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/objects/result.object.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/objects/result.object.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/base.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/base.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/home/home.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/home/home.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/views/person/person.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/person/person.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/results/addresult.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/results/addresult.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/views/results/result.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/results/result.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/style.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -119,7 +108,7 @@
       <workItem from="1642176236299" duration="2874000" />
       <workItem from="1642184633877" duration="3077000" />
       <workItem from="1642242366658" duration="614000" />
-      <workItem from="1642323452444" duration="27611000" />
+      <workItem from="1642323452444" duration="28733000" />
     </task>
     <task id="LOCAL-00001" summary="Cloned from ledge.club">
       <created>1641901299367</created>
@@ -149,7 +138,14 @@
       <option name="project" value="LOCAL" />
       <updated>1642196745728</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Almost complete!&#10;&#10; - New user flow, settings, and leaderboard need implementing&#10; - Design of login and add puzzle need implementing">
+      <created>1642360674599</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1642360674599</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -183,6 +179,7 @@
     <MESSAGE value="Trimmed/refactored to trackle &amp; sharesheet parser implemented" />
     <MESSAGE value="Tidying up parser and result.object.php" />
     <MESSAGE value="More theme stuuf" />
-    <option name="LAST_COMMIT_MESSAGE" value="More theme stuuf" />
+    <MESSAGE value="Almost complete!&#10;&#10; - New user flow, settings, and leaderboard need implementing&#10; - Design of login and add puzzle need implementing" />
+    <option name="LAST_COMMIT_MESSAGE" value="Almost complete!&#10;&#10; - New user flow, settings, and leaderboard need implementing&#10; - Design of login and add puzzle need implementing" />
   </component>
 </project>

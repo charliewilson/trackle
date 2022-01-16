@@ -47,6 +47,26 @@ header a.button:last-of-type {
   margin-right:0;
 }
 
+@media (max-width: 650px) {
+  header {
+    display:block;
+  }
+
+  header h1 {
+    margin-bottom:20px;
+  }
+
+  header div {
+    display:flex;
+    flex-direction:row;
+    justify-content: space-between;
+  }
+
+  header a.button {
+    margin-right:0;
+  }
+}
+
 .container {
   width:100%;
   max-width:960px;
@@ -214,7 +234,7 @@ a.button:hover {
 
 .result-container .result-card {
   flex:1;
-  max-width: 500px;
+  /*max-width: 500px;*/
   margin-right:20px;
 }
 
@@ -252,6 +272,18 @@ a.button:hover {
   flex-direction:row;
   justify-content: space-between;
   align-items: center;
+}
+
+@media (max-width: 650px) {
+  .result-container {
+    display:block;
+  }
+
+  .result-container .result-card {
+    width:auto;
+    margin-right:0;
+    margin-bottom:20px;
+  }
 }
 
 .card .card-header {
