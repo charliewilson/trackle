@@ -1,0 +1,33 @@
+{% extends 'base.twig' %}
+{% set title = 'Settings' %}
+
+{% block header %}
+  {% if me %}<a class="button" href="/r/add">Add Result</a><a class="button" href="/settings">Settings</a><a class="button" href="/logout">Logout</a>{% else %}<a class="button" href="/login">Login / Register</a>{% endif %}
+{% endblock %}
+
+{% block main %}
+  <div class="settings-container">
+    <form action="/settings/email" method="post">
+      <p>
+        <label for="settings_email">Edit Email</label>
+        <input id="settings_email" name="email" placeholder="Email" type="email" value="{{ me.email }}">
+      </p>
+      <p>
+        <input type="submit" value="Save">
+      </p>
+    </form>
+    <form action="/settings/password" method="post">
+      <p>
+        <label for="settings_oldpass">Change Password</label>
+        <input id="settings_oldpass" name="oldpass" placeholder="Old Password" type="password">
+        <input id="settings_newpass" name="newpass" placeholder="New Password" type="password">
+        <input id="settings_newpass_confirm" name="newpassconfirm" placeholder="Confirm New Password" type="password">
+      </p>
+      <p>
+        <input type="submit" value="Save">
+      </p>
+    </form>
+
+    <a class="deletebutton" href="/settings/delete">Delete Account</a>
+  </div>
+{% endblock %}

@@ -31,7 +31,9 @@
   </div>
 
   <div class="cards-container">
+    {% if not results %}<p>No results yet! <a href="/r/add">Add one?</a></p>{% else %}
   {% for result in results %}{{ result.render|raw }}{% endfor %}
+    {% endif %}
   </div>
 {% endblock %}
 

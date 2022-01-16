@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.0.4deb2ubuntu5
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Jan 14, 2022 at 04:52 PM
--- Server version: 8.0.27-0ubuntu0.20.04.1
--- PHP Version: 8.0.14
+-- Host: localhost:3306
+-- Generation Time: Jan 16, 2022 at 10:33 PM
+-- Server version: 8.0.27-0ubuntu0.21.10.1
+-- PHP Version: 8.0.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -40,7 +40,16 @@ CREATE TABLE `results` (
 --
 
 INSERT INTO `results` (`id`, `user_id`, `puzzle_no`, `guesses_no`, `guess_data`) VALUES
-(1, 1, 204, '4', 'a:4:{i:0;s:5:\"XXYXX\";i:1;s:5:\"XGXYY\";i:2;s:5:\"XGGXG\";i:3;s:5:\"GGGGG\";}');
+(1, 1, 204, '4', 'a:4:{i:0;s:5:\"XXYXX\";i:1;s:5:\"XGXYY\";i:2;s:5:\"XGGXG\";i:3;s:5:\"GGGGG\";}'),
+(2, 1, 205, '4', 'a:4:{i:0;s:5:\"XXXYX\";i:1;s:5:\"YYXXX\";i:2;s:5:\"XXYYX\";i:3;s:5:\"GGGGG\";}'),
+(3, 1, 206, '4', 'a:4:{i:0;s:5:\"XYXXX\";i:1;s:5:\"XYXXX\";i:2;s:5:\"YYYXX\";i:3;s:5:\"GGGGG\";}'),
+(4, 1, 207, '5', 'a:5:{i:0;s:5:\"XXYXX\";i:1;s:5:\"XXXXG\";i:2;s:5:\"XXXGG\";i:3;s:5:\"YGXGG\";i:4;s:5:\"GGGGG\";}'),
+(5, 1, 208, '2', 'a:2:{i:0;s:5:\"GXGGX\";i:1;s:5:\"GGGGG\";}'),
+(6, 1, 209, '5', 'a:5:{i:0;s:5:\"XXXXX\";i:1;s:5:\"XGXXX\";i:2;s:5:\"XGGXX\";i:3;s:5:\"XGGYX\";i:4;s:5:\"GGGGG\";}'),
+(7, 1, 210, '2', 'a:2:{i:0;s:5:\"XYYYX\";i:1;s:5:\"GGGGG\";}'),
+(8, 1, 211, '3', 'a:3:{i:0;s:5:\"GXXYX\";i:1;s:5:\"GXYYX\";i:2;s:5:\"GGGGG\";}'),
+(9, 1, 202, '5', 'a:5:{i:0;s:5:\"XYXXX\";i:1;s:5:\"XXXGX\";i:2;s:5:\"XXYGY\";i:3;s:5:\"GGGGX\";i:4;s:5:\"GGGGG\";}'),
+(10, 1, 203, '3', 'a:3:{i:0;s:5:\"XXXXX\";i:1;s:5:\"XYXXY\";i:2;s:5:\"GGGGG\";}');
 
 -- --------------------------------------------------------
 
@@ -67,7 +76,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `email`, `password`, `username`, `status`, `verified`, `resettable`, `roles_mask`, `registered`, `last_login`, `force_logout`) VALUES
-(1, 'me@charliewilson.co.uk', '$2y$10$ncmJ5hzqSh/7PCKjv7dhXujM85Hevxfnrba7c/FEu0TTrFM61uY.u', 'charlie', 0, 1, 1, 0, 1585749826, 1642173235, 109);
+(1, 'me@charliewilson.co.uk', '$2y$10$ncmJ5hzqSh/7PCKjv7dhXujM85Hevxfnrba7c/FEu0TTrFM61uY.u', 'charlie', 0, 1, 1, 0, 1585749826, 1642371996, 109),
+(2, 'test@email.com', '$2y$10$UTAHR5Sl5PmOX31HJ1QgZOlLEbiFyITpSw1KSdyJwcDdePiFS9u6W', 'test', 0, 1, 1, 0, 1642371242, 1642371710, 0);
 
 -- --------------------------------------------------------
 
@@ -102,7 +112,7 @@ CREATE TABLE `users_data` (
 --
 
 INSERT INTO `users_data` (`id`, `email`, `name`, `data`) VALUES
-(1, 'me@charliewilson.co.uk', 'Charlie', NULL);
+(1, 'admin@ledge.club', 'Admin', NULL);
 
 -- --------------------------------------------------------
 
@@ -162,22 +172,23 @@ CREATE TABLE `users_throttling` (
 --
 
 INSERT INTO `users_throttling` (`bucket`, `tokens`, `replenished_at`, `expires_at`) VALUES
-('ejWtPDKvxt-q7LZ3mFjzUoIWKJYzu47igC8Jd9mffFk', 74, 1642173234, 1642713234),
+('ejWtPDKvxt-q7LZ3mFjzUoIWKJYzu47igC8Jd9mffFk', 73.8697, 1641915292, 1642455292),
 ('CUeQSH1MUnRpuE3Wqv_fI3nADvMpK_cg6VpYK37vgIw', 0.0262106, 1586215397, 1586647397),
 ('Jjl8HEbTSJpZBWoyXOajJXqciuUdngUbah061jwhliE', 18.0978, 1597337951, 1597373951),
 ('BpOOksi_R8S0isSN8M_Cuxq0NgzWMKFixbgP5tOUODU', 498.775, 1585756942, 1585929742),
 ('pm9DIO1-R3HkbKMpWAz6tiQ6qB0y0POpZni3nxK7uuM', 0.601122, 1585821820, 1585994620),
 ('XuJEDcv8ukwLqu1x6P90iBxBKvNDWdPR0Gu8IJfwp5U', 2, 1585769883, 1586288283),
-('gaLyvd3WHMr5C1tE6VQEztZCcggy5piG3uEiX1VUYJ0', 498.023, 1631436327, 1631609127),
+('gaLyvd3WHMr5C1tE6VQEztZCcggy5piG3uEiX1VUYJ0', 498.418, 1642370432, 1642543232),
 ('frEiNi6jWleJtwFU3Zq5RcVwKk7HH7fLXLkEsas61eU', 72.2319, 1585995953, 1586535953),
-('QduM75nGblH2CDKFyk0QeukPOwuEVDAUFE54ITnHM38', 74, 1631804151, 1632344151),
+('QduM75nGblH2CDKFyk0QeukPOwuEVDAUFE54ITnHM38', 49.6811, 1642371996, 1642911996),
 ('QDBtgOYcwUC_eln7BwKxS9_sS9sVvaRwhrvakKRwAtE', 67.3974, 1597357693, 1597897693),
 ('zDSuZfHkqf3IFfjKRdJgoUPSiDl9KPzSyXgyNuvuGXk', 19, 1585995946, 1586031946),
 ('2X063fuVjbUg4UeSmRXAC530SCE_QUW5Djet1KqnKMg', 9.0717, 1586215367, 1586244166),
-('OMhkmdh1HUEdNPRi-Pe4279tbL5SQ-WMYf551VVvH8U', 18.0044, 1631436327, 1631472327),
-('PZ3qJtO_NLbJfRIP-8b4ME4WA3xxc6n9nbCORSffyQ0', 3.37949, 1597332422, 1597764422),
+('OMhkmdh1HUEdNPRi-Pe4279tbL5SQ-WMYf551VVvH8U', 17.2723, 1642370432, 1642406432),
+('PZ3qJtO_NLbJfRIP-8b4ME4WA3xxc6n9nbCORSffyQ0', 4, 1642371242, 1642803242),
 ('3VrMU354Y_uVX22KD-pensoGyl9P8xi0fs5YhJZGrOk', 11, 1597332438, 1597361237),
-('jYZVmDIUv4zK1lpk-7mKnoxglk4fFexvfIcI6WS9piE', 18.0056, 1597355085, 1597391085);
+('jYZVmDIUv4zK1lpk-7mKnoxglk4fFexvfIcI6WS9piE', 18.0056, 1597355085, 1597391085),
+('d7vQpH5zB20WwobZFgmcyObT4wLprPi8dUTA_YomDC0', 499, 1642359428, 1642532228);
 
 --
 -- Indexes for dumped tables
@@ -219,7 +230,13 @@ ALTER TABLE `users_data`
 -- AUTO_INCREMENT for table `results`
 --
 ALTER TABLE `results`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `users_data`

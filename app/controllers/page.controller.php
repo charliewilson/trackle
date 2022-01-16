@@ -3,6 +3,8 @@ namespace trackle;
 
 use Delight\Auth\AmbiguousUsernameException;
 use Delight\Auth\AuthError;
+use Delight\Auth\DuplicateUsernameException;
+use Delight\Auth\InvalidEmailException;
 use Delight\Auth\InvalidPasswordException;
 use Delight\Auth\AttemptCancelledException;
 use Delight\Auth\EmailNotVerifiedException;
@@ -11,6 +13,7 @@ use Delight\Auth\TooManyRequestsException;
 
 use Delight\Auth\UnknownUsernameException;
 
+use Delight\Auth\UserAlreadyExistsException;
 use trackle\Exceptions\CantCreateResultException;
 use trackle\Exceptions\ResultNotFoundException;
 use trackle\Exceptions\UserNotFoundException;
@@ -76,7 +79,15 @@ class PageController {
     } else {
       //Homepage
       try {
-        echo $this->app->twig->render('login/login.twig');
+        if (isset($_GET['invalid'])) {
+          echo $this->app->twig->render('login/login.twig',[
+            "message" => "Username or Password is incorrect!"
+          ]);
+        } else {
+          echo $this->app->twig->render('login/login.twig');
+        }
+
+
       } catch (LoaderError | RuntimeError | SyntaxError $e) {
         $this->errorMessage($e->getMessage());
       }
@@ -119,6 +130,67 @@ class PageController {
       }
     }
   }
+
+  public function registerGet() {
+    if ($this->app->auth->isLoggedIn()){
+      header("Location: /");
+    } else {
+      //Homepage
+      try {
+        if (isset($_GET['invalid'])) {
+          echo $this->app->twig->render('login/register.twig',[
+            "message" => "Username or Password is incorrect!"
+          ]);
+        } else {
+          echo $this->app->twig->render('login/register.twig');
+        }
+
+
+      } catch (LoaderError | RuntimeError | SyntaxError $e) {
+        $this->errorMessage($e->getMessage());
+      }
+      die();
+    }
+  }
+
+  public function registerPost() {
+    if ($this->app->auth->isLoggedIn()) {
+      header("Location: /");
+    } else {
+      $username = filter_var($_POST['username'], FILTER_SANITIZE_STRING);
+      $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
+      $password = filter_var($_POST['password'], FILTER_SANITIZE_STRING);
+
+      try {
+        $this->app->auth->registerWithUniqueUsername($email, $password, $username);
+        $this->app->auth->loginWithUsername($username, $password);
+        header("Location: /");
+      }
+      catch (InvalidEmailException) {
+        header("Location: /register?m=ie");
+      }
+      catch (InvalidPasswordException) {
+        header("Location: /register?m=ip");
+      }
+      catch (UserAlreadyExistsException) {
+        header("Location: /register?m=eae");
+      }
+      catch (DuplicateUsernameException) {
+        header("Location: /register?m=uae");
+      }
+      catch (TooManyRequestsException) {
+        header("Location: /register?m=tmr");
+      }
+      catch (
+      AttemptCancelledException |
+      EmailNotVerifiedException |
+      UnknownUsernameException |
+      AmbiguousUsernameException|
+      AuthError $e) {
+        $this->errorMessage($e->getMessage());
+      }
+    }
+  }
   
   //HOMEPAGE
 //  public function homeGet() {
@@ -154,8 +226,17 @@ class PageController {
         }
       }
 
-      $winrate = round(($won / $played) * 100);
-      $average = round($sum / $won, 2);
+      if ($played == 0) {
+        $winrate = "n/a";
+      } else {
+        $winrate = round(($won / $played) * 100);
+      }
+
+      if ($won == 0) {
+        $average = "0";
+      } else {
+        $average = round(($won / $played) * 100);
+      }
 
       $me = ($this->app->auth->isLoggedIn()) ? $this->app->personController->getMe() : false;
 
@@ -253,6 +334,27 @@ class PageController {
         $this->errorMessage("Result cannot be created!");
       }
 
+      die();
+    } else {
+      header("Location: /login");
+    }
+  }
+
+  //USER
+  public function settingsGet() {
+    if ($this->app->auth->isLoggedIn()){
+      try {
+        $me = $this->app->personController->getMe();
+        echo $this->app->twig->render('settings/settings.twig', [
+          "me" => $me,
+          "breadcrumb" => [
+            ["link" => "/u/".$me->username(), "display" => $me->username()],
+            ["link" => false, "display" => "settings"]
+          ],
+        ]);
+      } catch (LoaderError | RuntimeError | SyntaxError $e) {
+        $this->errorMessage($e->getMessage());
+      }
       die();
     } else {
       header("Location: /login");

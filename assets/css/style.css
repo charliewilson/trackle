@@ -1,7 +1,7 @@
 :root {
   --border-colour: #d3d6da;
   --tile-green: #78b158;
-  --tile-yellow: #fdcb58;
+  --tile-yellow: #cc981f;
   --tile-black: #202225;
   --tile-clear: #ddd;
 
@@ -39,11 +39,11 @@ header a:hover {
   text-decoration:underline;
 }
 
-header a.button {
+header .button {
   margin-right:20px;
 }
 
-header a.button:last-of-type {
+header .button:last-of-type {
   margin-right:0;
 }
 
@@ -62,7 +62,7 @@ header a.button:last-of-type {
     justify-content: space-between;
   }
 
-  header a.button {
+  header .button {
     margin-right:0;
   }
 }
@@ -73,6 +73,74 @@ header a.button:last-of-type {
   margin:auto;
 }
 
+.container.login {
+  box-sizing: border-box;
+  width:100%;
+  height:100%;
+  display:flex;
+  justify-content:center;
+}
+
+.container.login .login-form {
+  margin-top:100px;
+  max-width:400px;
+  width:100%;
+}
+
+.container.login .login-form h1 {
+  margin:0;
+}
+
+.container.login .login-form h2 {
+  margin-top:0;
+  margin-bottom:20px;
+  font-size:14px;
+}
+
+.container.login .login-form input[type='text'],
+.container.login .login-form input[type='email'],
+.container.login .login-form input[type='password'],
+.container.login .login-form input[type='submit'] {
+  border: 2px solid var(--border-colour);
+  border-radius: var(--card-radius);
+  padding:10px;
+  box-sizing:border-box;
+  background:#FFF;
+}
+
+.container.login .login-form input[type='text'],
+.container.login .login-form input[type='email'],
+.container.login .login-form input[type='password'] {
+  display:block;
+  width:100%;
+  margin-bottom:20px;
+}
+
+.container.login .login-form-footer {
+  display:flex;
+  flex-direction:row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.container.login .login-form-message {
+  background: #FFCCD1;
+  text-align:center;
+  padding:10px;
+  border-radius: var(--card-radius);
+  margin-bottom:20px;
+  font-size:14px;
+  color:#333;
+}
+
+.container.login .login-form-footer p {
+  margin:0;
+}
+
+.container.login .login-form input[type='submit']:hover {
+  cursor:pointer;
+}
+
 .graph-container {
   display:flex;
   flex-direction:row;
@@ -80,13 +148,14 @@ header a.button:last-of-type {
 }
 
 .graph-container .graph,
-.graph-container .stats .row {
+.graph-container .stats .row,
+.container.login .login-form {
   border:2px solid var(--border-colour);
   padding:20px;
   border-radius: var(--card-radius);
 }
 
-a.button {
+.button {
   border:2px solid var(--border-colour);
   padding: 10px;
   border-radius: var(--card-radius);
@@ -94,7 +163,7 @@ a.button {
   display:inline-block;
 }
 
-a.button:hover {
+.button:hover {
   transform: translate(-2px, -2px);
   box-shadow: var(--shadow);
 }

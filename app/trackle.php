@@ -92,72 +92,6 @@ class User {
     $this->db = $db;
   }
 
-  // Confirms that the email exists and password is correct.
-  // Returns true if correct, false in any other case.
-  public function confirmDetails($email, $pass): bool {
-    try {
-      $q = $this->db->prepare("
-        SELECT `email`, `password`
-        FROM `users`
-        WHERE `email` = :email
-      ");
-
-      $q->execute([
-        ':email' => filter_var($email,FILTER_SANITIZE_EMAIL)
-      ]);
-
-      $data = $q->fetch();
-      return password_verify(filter_var($pass, FILTER_SANITIZE_STRING), $data['password']);
-
-    } catch (Exception $e) {
-      return false;
-    }
-
-  }
-  
-  //Get single data key value for user with the supplied ID
-  public function getData($userid, $key) {
-    $user = $this->db->prepare("
-      SELECT `data`
-      FROM `users_data`
-      WHERE `id` = :id
-    ");
-    $user->execute([':id' => filter_var($userid, FILTER_SANITIZE_NUMBER_INT)]);
-    if ($user) {
-      $userdata = $user->fetch();
-      $data = unserialize(base64_decode($userdata['data']));
-      return (isset($data["setting_".$key])) ? $data["setting_".$key] : false;
-    } else {
-      return false;
-    }
-  }
-
-  //Set single data key value for user with the supplied ID
-  public function setData($userid, $key, $value) {
-    $user = $this->db->prepare("
-      SELECT `data`
-      FROM `users_data`
-      WHERE `id` = :id
-    ");
-    $user->execute([':id' => filter_var($userid, FILTER_SANITIZE_NUMBER_INT)]);
-      if ($user) {
-        $userdata = $user->fetch();
-        $data = unserialize(base64_decode($userdata['data']));
-        $data['setting_'.$key] = $value;
-        $finaldata = $this->db->prepare("
-          UPDATE `users_data`
-          SET `data` = :data
-          WHERE `id` = :id
-        ");
-        return $finaldata->execute([
-          ':data' => base64_encode(serialize($data)),
-          ':id' => filter_var($userid, FILTER_SANITIZE_NUMBER_INT),
-        ]);
-      } else {
-        return false;
-      }
-  }
-
   // Gets the full name from a user's email for use in adding comments etc.
   public function getName($email) {
     try {
@@ -179,6 +113,5 @@ class User {
     } catch (Exception $e) {
       return false;
     }
-
   }
 }

@@ -22,8 +22,10 @@ try {
     ['GET', '/', 'indexGet'],
     //Login
     ['GET', '/login', 'loginGet'],
+    ['GET', '/register', 'registerGet'],
     ['GET', '/logout', 'logoutGet'],
     ['POST', '/login', 'loginPost'],
+    ['POST', '/register', 'registerPost'],
     //Homepage and feed
 //    ['GET', '/home', 'homeGet'],
     //Spots
@@ -33,6 +35,8 @@ try {
     //Users
     ['GET', '/u/[a:name]', 'personGet'],
     ['GET', '/u/[a:name]/[i:puzzleno]', 'resultGet'],
+    //Settings
+    ['GET', '/settings', 'settingsGet'],
   ]);
   
 } catch (Exception $e) {
