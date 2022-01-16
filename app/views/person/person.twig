@@ -1,16 +1,108 @@
 {% extends 'base.twig' %}
 {% set title = person.username %}
 
+{% block header %}
+  {% if me %}<a class="button" href="/r/add">Add Puzzle</a><a class="button" href="/settings">Settings</a><a class="button" href="/logout">Logout</a>{% else %}<a class="button" href="/register">Register</a><a class="button" href="/login">Login</a>{% endif %}
+{% endblock %}
+
 {% block main %}
-  <h1>{{ person.username }}</h1>
-  <hr>
-  <p>Results:</p>
-  <div class="results-container">
-    {% for result in results %}
-      <div class="result">
-        <pre>{{ result.toShare }}</pre>
+  <div class="graph-container">
+    <div class="graph">
+      <canvas id="personGraph"></canvas>
+    </div>
+    <div class="stats">
+      <div class="row">
+        <span>{{ stats.won }}</span>
+        <span>Total Won</span>
       </div>
-    {% endfor %}
+      <div class="row">
+        <span>{{ stats.played }}</span>
+        <span>Total Played</span>
+      </div>
+      <div class="row">
+        <span>{{ stats.winrate }}</span>
+        <span>Win Rate %</span>
+      </div>
+      <div class="row">
+        <span>{{ stats.average }}</span>
+        <span>Avg. Guess</span>
+      </div>
+    </div>
   </div>
-  <a href="/home">home</a>
+
+  <div class="cards-container">
+  {% for result in results %}{{ result.render|raw }}{% endfor %}
+  </div>
+{% endblock %}
+
+{% block js %}
+  <script src="/assets/js/chart.js"></script>
+  <script>
+    const data = {
+      labels: [{% for result in graphData %}{{ result.number }} ,{% endfor %}],
+      datasets: [{
+        label: 'Guesses',
+        data: [{% for result in graphData %}{{ result.guesses }} ,{% endfor %}],
+        fill: false
+      }]
+    };
+
+    const config = {
+      type: 'line',
+      data: data,
+      options: {
+        maintainAspectRatio: true,
+        backgroundColor: "#78b158",
+        elements: {
+          line: {
+            borderColor: "#262222"
+          },
+          point: {
+            radius: 6,
+            hoverRadius: 8
+          }
+        },
+        animation: false,
+        scales: {
+          y: {
+            beginAtZero: true,
+            min: 0,
+            max: 6,
+            title: {
+              display:true,
+              text: "Number of Guesses"
+            }
+          },
+          x: {
+            title: {
+              display: true,
+              text: "Puzzle Number"
+            }
+          }
+        },
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+            yAlign: "top",
+            displayColors: false,
+            callbacks: {
+              title: function(context) {
+                return "Puzzle #"+context[0].label;
+              },
+              label: function(context) {
+                return context.formattedValue + " / 6";
+              }
+            }
+          }
+        }
+      }
+    };
+
+    const personGraph = new Chart(
+      document.getElementById('personGraph'),
+      config
+    );
+  </script>
 {% endblock %}

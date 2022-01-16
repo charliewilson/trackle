@@ -25,13 +25,14 @@ try {
     ['GET', '/logout', 'logoutGet'],
     ['POST', '/login', 'loginPost'],
     //Homepage and feed
-    ['GET', '/home', 'homeGet'],
+//    ['GET', '/home', 'homeGet'],
     //Spots
     ['GET', '/r/[i:id]', 'resultGet'],
     ['GET', '/r/add', 'resultAddGet'],
     ['POST', '/r/add', 'resultAddPost'],
     //Users
-    ['GET', '/u/[a:name]', 'personGet']
+    ['GET', '/u/[a:name]', 'personGet'],
+    ['GET', '/u/[a:name]/[i:puzzleno]', 'resultGet'],
   ]);
   
 } catch (Exception $e) {

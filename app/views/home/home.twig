@@ -4,11 +4,8 @@
 {% block main %}
   <p>Welcome back, {{ me.username }}</p>
   <hr>
-  <p>All users:</p>
-  <ul>
-    {% for user in users %}
-      <li><a href="/u/{{ user.username }}">{{ user.username }}</a></li>
-    {% endfor %}
-  </ul>
-  <a href="/logout">logout</a>
+  <p><a href="/r/add">Add New Result</a></p>
+  <p><a href="/u/{{ me.username }}">View My Profile</a></p>
+  <p><a href="/logout">logout</a></p>
+
 {% endblock %}

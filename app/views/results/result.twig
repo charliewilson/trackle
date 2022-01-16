@@ -1,9 +1,32 @@
 {% extends 'base.twig' %}
-{% set title = result.puzzleNo %}
+{% set title = result.user.username~" #"~result.puzzleNo %}
+
+{% block header %}
+  <a class="button" href="/u/{{ result.user.username }}">Back to Profile</a><a class="button" href="/u/{{ result.user.username }}/share">Share</a>{% if me %}<a class="button" href="/logout">Logout</a>{% else %}<a class="button" href="/register">Register</a><a class="button" href="/login">Login</a>{% endif %}
+{% endblock %}
 
 {% block main %}
-<h1>{{ result.puzzleNo }}</h1>
-<hr>
-  <pre>{{ result.toShare }}</pre>
-<a href="/home">home</a>
+  <div class="result-container">
+    <div class="result-card">
+      {{ result.render|raw }}
+      <div class="result-pagination">
+        <div>
+          {% if next %}
+            <a class="button" href="/u/{{ result.user.username }}/{{ next.puzzleNo }}">&lAarr; Newer</a>
+          {% endif %}
+        </div>
+        <div>
+          {% if previous %}
+            <a class="button" href="/u/{{ result.user.username }}/{{ previous.puzzleNo }}">Older &rAarr;</a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    <div class="result-leaderboard">
+      <div class="header">Leaderboard</div>
+      <div class="inner">
+        <p>No data yet.</p>
+      </div>
+    </div>
+  </div>
 {% endblock %}

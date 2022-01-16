@@ -54,4 +54,43 @@ class Result {
 
     return implode("\n", $lines);
   }
+
+  public function render(): string {
+    $username = $this->user()->username();
+    $puzzle = $this->puzzleNo();
+    $guess = $this->guessesNo();
+    $lines = $this->guesses();
+
+    $grid = [];
+    $gridtemplate = "";
+
+    //Add empty lines post-success so there are always 6 lines
+    for ($i = 0; $i < 6; $i++) {
+      if (isset($lines[$i])) {
+        $grid[$i] = $lines[$i];
+      } else {
+        $grid[$i] = "WWWWW";
+      }
+    }
+
+    foreach ($grid as $line) {
+      foreach (str_split($line) as $character) {
+        $gridtemplate .= "<div class='card-grid-square $character'></div>";
+      }
+    }
+
+    return <<<TEMPLATE
+<a href="/u/$username/$puzzle" class="card-link">
+  <div class="card">
+    <div class="card-header">
+      <p>Puzzle #$puzzle</p>
+      <p>$guess/6</p>
+    </div>
+    <div class="card-grid">
+    $gridtemplate
+    </div>
+  </div>
+</a>
+TEMPLATE;
+  }
 }

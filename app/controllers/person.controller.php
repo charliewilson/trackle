@@ -1,7 +1,9 @@
 <?php
 namespace trackle;
 
+use Delight\Auth\NotLoggedInException;
 use PDO;
+use trackle\Exceptions\UserNotFoundException;
 
 class PersonController {
   
@@ -51,6 +53,7 @@ class PersonController {
   /**
    * @param string $username_raw
    * @return Person
+   * @throws UserNotFoundException
    */
   public function getByUsername(string $username_raw): Person {
     $username = filter_var($username_raw, FILTER_SANITIZE_STRING);
@@ -63,9 +66,15 @@ class PersonController {
 
     $person->execute([':username' => $username]);
 
-    return $person->fetchObject('\trackle\Person', [
+    $return = $person->fetchObject('\trackle\Person', [
       $this->app->db
     ]);
+
+    if (!$return) {
+      throw new UserNotFoundException("User not found!");
+    } else {
+      return $return;
+    }
   }
 
   /**

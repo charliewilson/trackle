@@ -3,13 +3,29 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1">
   <title>{{ title ? title|raw : 'Page'}} | trackle</title>
-  <link rel="stylesheet" href="/vendor/drmonty/leaflet/css/leaflet.css" />
-  <script src="/vendor/drmonty/leaflet/js/leaflet.min.js"></script>
+  <link rel="stylesheet" href="/assets/css/style.css" />
 </head>
 <body>
+<div class="container">
+<header>
+  <h1>
+    <a href="/">trackle</a>
+    {% for item in breadcrumb %}
+      {% if item.link %}
+        / <a href="{{ item.link }}">{{ item.display|raw }}</a>
+      {% else %}
+        / {{ item.display|raw }}
+      {% endif %}
+    {% endfor %}
+  </h1>
+  <div>{% block header %}{% endblock %}</div>
+</header>
 {% block main %}
   {# MAIN PAGE GOES HERE #}
 {% endblock %}
+</div>
+{% block js %}{% endblock %}
 </body>
 </html>
