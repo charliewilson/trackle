@@ -11,6 +11,7 @@ use Delight\Auth\EmailNotVerifiedException;
 use Delight\Auth\NotLoggedInException;
 use Delight\Auth\TooManyRequestsException;
 
+use Delight\Auth\UnknownIdException;
 use Delight\Auth\UnknownUsernameException;
 
 use Delight\Auth\UserAlreadyExistsException;
@@ -191,6 +192,88 @@ class PageController {
       }
     }
   }
+
+  public function changeEmailPost() {
+    if (!$this->app->auth->isLoggedIn()) {
+      header("Location: /");
+    } else {
+      $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
+      try {
+
+        $this->app->auth->changeEmail($email, function($s, $t){
+          $this->app->auth->confirmEmail($s, $t);
+        });
+        header("Location: /settings?m=ec");
+      } catch (AuthError $e) {
+        die($e->getmessage());
+        header("Location: /settings?m=ae");
+      } catch (InvalidEmailException) {
+        header("Location: /settings?m=ie");
+      } catch (NotLoggedInException) {
+        header("Location: /");
+      } catch (TooManyRequestsException) {
+        header("Location: /settings?m=tmr");
+      } catch (UserAlreadyExistsException) {
+        header("Location: /settings?m=uae");
+      } catch (EmailNotVerifiedException) {
+        header("Location: /settings?m=env");
+      }
+    }
+  }
+
+  public function changePasswordPost() {
+    if (!$this->app->auth->isLoggedIn()) {
+      header("Location: /");
+    } else {
+      $oldpass = filter_var($_POST['oldpass'], FILTER_SANITIZE_STRING);
+      $newpass = filter_var($_POST['newpass'], FILTER_SANITIZE_STRING);
+      $newpassconfirm = filter_var($_POST['newpassconfirm'], FILTER_SANITIZE_STRING);
+      try {
+        if($newpass != $newpassconfirm) {
+          header("Location: /settings?m=pdm");
+        } else {
+          $this->app->auth->changePassword($oldpass, $newpass);
+          header("Location: /settings?m=pc");
+        }
+      } catch (AuthError) {
+        header("Location: /settings?m=ae");
+      } catch (InvalidPasswordException) {
+        header("Location: /settings?m=ip");
+      } catch (NotLoggedInException) {
+        header("Location: /");
+      } catch (TooManyRequestsException) {
+        header("Location: /settings?m=tmr");
+      }
+    }
+  }
+
+  public function deleteUser($pass, $id = null) {
+    if ($id == null) {
+      $id = $this->app->auth->getUserId();
+    }
+    $cleanid = filter_var($id, FILTER_SANITIZE_NUMBER_INT);
+    try {
+      if ($this->app->auth->reconfirmPassword($pass)) {
+        $this->app->auth->admin()->deleteUserById($cleanid);
+        $this->app->auth->logOutEverywhere();
+        header("Location: /?m=ad");
+      } else {
+        header("Location: /deleteaccount?m=dapi");
+      }
+    }
+    catch (UnknownIdException) {
+      header("Location: /deleteaccount?m=uid");
+    }
+    catch (NotLoggedInException) {
+      header("Location: /");
+    }
+    catch (TooManyRequestsException) {
+      header("Location: /deleteaccount?m=tmr");
+    }
+    catch (AuthError) {
+      header("Location: /deleteaccount?m=ae");
+    }
+  }
   
   //HOMEPAGE
 //  public function homeGet() {
@@ -220,7 +303,7 @@ class PageController {
         $guess = ($result->guessesNo() == "X") ? null : $result->guessesNo();
         $graphData[] = ["number" => $result->puzzleNo(), "guesses" => $guess];
         $played += 1;
-        if ($result->guessesNo() != "X") {
+        if ($result->guessesNo() != "0") {
           $won += 1;
           $sum += $result->guessesNo();
         }
@@ -235,7 +318,8 @@ class PageController {
       if ($won == 0) {
         $average = "0";
       } else {
-        $average = round(($won / $played) * 100);
+        $average = $sum / $played;
+//        $average = round(($won / $played) * 100);
       }
 
       $me = ($this->app->auth->isLoggedIn()) ? $this->app->personController->getMe() : false;
@@ -309,8 +393,13 @@ class PageController {
   public function resultAddGet() {
     if ($this->app->auth->isLoggedIn()){
       try {
+        $me = $this->app->personController->getMe();
         echo $this->app->twig->render('results/addresult.twig',[
-
+          "me" => $me,
+          "breadcrumb" => [
+            ["link" => "/u/" . $me->username(), "display" => $me->username()],
+            ["link" => false, "display" => "add"]
+          ],
         ]);
       } catch (LoaderError | RuntimeError | SyntaxError $e) {
         $this->errorMessage($e->getMessage());
@@ -327,9 +416,9 @@ class PageController {
         $user = $this->app->personController->getMe();
 
         $result = $this->app->resultController::parseFromShare($_POST['text']);
-        $create = $this->app->resultController->create($result['puzzle_no'], $result['guesses_no'], $result['lines'], $user);
+        $this->app->resultController->create($result['puzzle_no'], $result['guesses_no'], $result['lines'], $user);
 
-        header("Location: /r/".$create);
+        header("Location: /u/".$user->username());
       } catch (CantCreateResultException) {
         $this->errorMessage("Result cannot be created!");
       }

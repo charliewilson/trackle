@@ -47,6 +47,12 @@ header .button:last-of-type {
   margin-right:0;
 }
 
+.grey-box {
+  border:2px solid var(--border-colour);
+  padding:20px;
+  border-radius:var(--card-radius);
+}
+
 @media (max-width: 650px) {
   header {
     display:block;
@@ -147,20 +153,13 @@ header .button:last-of-type {
   margin-bottom:20px;
 }
 
-.graph-container .graph,
-.graph-container .stats .row,
-.container.login .login-form {
-  border:2px solid var(--border-colour);
-  padding:20px;
-  border-radius: var(--card-radius);
-}
-
 .button {
   border:2px solid var(--border-colour);
   padding: 10px;
   border-radius: var(--card-radius);
   transition:transform .1s, box-shadow .1s;
   display:inline-block;
+  background:#FFF;
 }
 
 .button:hover {
@@ -307,7 +306,8 @@ header .button:last-of-type {
   margin-right:20px;
 }
 
-.result-leaderboard {
+.result-leaderboard,
+.add-result-help {
   flex:1;
   box-sizing: border-box;
   padding: 20px;
@@ -319,7 +319,8 @@ header .button:last-of-type {
   padding:0;
 }
 
-.result-leaderboard .header {
+.result-leaderboard .header,
+.add-result-help .header {
   background: var(--border-colour);
   color: var(--tile-black);
   flex:none;
@@ -330,9 +331,15 @@ header .button:last-of-type {
   font-weight:bold;
 }
 
-.result-leaderboard .inner {
+.result-leaderboard .inner,
+.add-result-help .inner {
   padding:20px;
   flex:1;
+}
+
+.result-leaderboard .inner p,
+.add-result-help .inner p {
+  margin-top:0;
 }
 
 .result-pagination {
@@ -353,6 +360,45 @@ header .button:last-of-type {
     margin-right:0;
     margin-bottom:20px;
   }
+}
+
+.centered-container {
+  width:70%;
+  margin:auto;
+}
+
+.add-result-container {
+  display:flex;
+  flex-direction:row;
+}
+
+.add-result-container .add-result-help {
+  margin-right:20px;
+  flex:1;
+}
+
+.add-result-container .add-result-form {
+  flex:1;
+}
+
+.add-result-container .add-result-form p {
+  margin-top:0;
+}
+
+.add-result-container .add-result-form div:last-of-type {
+  text-align:right;
+}
+
+.add-result-container .add-result-form textarea {
+  padding:10px;
+  width:100%;
+  box-sizing:border-box;
+  height: 160px;
+  resize: none;
+}
+
+.add-result-container .add-result-form input[type='submit'] {
+  margin-top:18px;
 }
 
 .card .card-header {

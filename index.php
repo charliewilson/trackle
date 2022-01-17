@@ -27,7 +27,7 @@ try {
     ['POST', '/login', 'loginPost'],
     ['POST', '/register', 'registerPost'],
     //Homepage and feed
-//    ['GET', '/home', 'homeGet'],
+    // ['GET', '/home', 'homeGet'],
     //Spots
     ['GET', '/r/[i:id]', 'resultGet'],
     ['GET', '/r/add', 'resultAddGet'],
@@ -37,6 +37,10 @@ try {
     ['GET', '/u/[a:name]/[i:puzzleno]', 'resultGet'],
     //Settings
     ['GET', '/settings', 'settingsGet'],
+    ['POST', '/settings/email', 'changeEmailPost'],
+    ['POST', '/settings/password', 'changePasswordPost'],
+    // ['GET', '/settings/delete', 'deleteAccountGet'],
+    // ['POST', '/settings/delete', 'deleteAccountPost'],
   ]);
   
 } catch (Exception $e) {

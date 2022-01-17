@@ -1,18 +1,26 @@
 {% extends 'base.twig' %}
 {% set title = "Add Result" %}
 
-{% block main %}
-<h1>Add Result</h1>
-<hr>
-  <form method="post" action="/r/add">
-    <p>
-      <label for="text">Paste wordle emojis here</label><br>
-      <textarea id="text" name="text"></textarea>
-    </p>
+{% block header %}
+  {% if me %}<a class="button" href="/settings">Settings</a><a class="button" href="/logout">Logout</a>{% else %}<a class="button" href="/login">Login / Register</a>{% endif %}
+{% endblock %}
 
-    <p>
-      <input type="submit" value="Add">
-    </p>
-  </form>
-  <a href="/">home</a>
+{% block main %}
+<div class="centered-container">
+  <div class="add-result-container">
+    <div class="add-result-help">
+      <div class="header">Help</div>
+      <div class="inner">
+        <p>1) Solve the Wordle</p>
+        <p>2) Tap the "Share" button</p>
+        <p>3) Copy to clipboard</p>
+        <p>4) Paste in the box</p>
+
+      </div>
+    </div>
+    <div class="add-result-form grey-box">
+      <form method="post" action="/r/add"><div><p><label for="text">Paste wordle emojis below:</label></p><textarea id="text" name="text" class="grey-box"></textarea></div><div><input class="button" type="submit" value="Add Result"></div></form>
+    </div>
+  </div>
+</div>
 {% endblock %}

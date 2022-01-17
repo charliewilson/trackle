@@ -2,28 +2,28 @@
 {% set title = person.username %}
 
 {% block header %}
-  {% if me %}<a class="button" href="/r/add">Add Result</a><a class="button" href="/settings">Settings</a><a class="button" href="/logout">Logout</a>{% else %}<a class="button" href="/login">Login / Register</a>{% endif %}
+  <a class="button" href="/r/add">Add Result</a><a class="button" href="/settings">Settings</a><a class="button" href="/logout">Logout</a>
 {% endblock %}
 
 {% block main %}
   <div class="graph-container">
-    <div class="graph">
+    <div class="graph grey-box">
       <canvas id="personGraph"></canvas>
     </div>
     <div class="stats">
-      <div class="row">
+      <div class="row grey-box">
         <span>{{ stats.won }}</span>
         <span>Total Won</span>
       </div>
-      <div class="row">
+      <div class="row grey-box">
         <span>{{ stats.played }}</span>
         <span>Total Played</span>
       </div>
-      <div class="row">
+      <div class="row grey-box">
         <span>{{ stats.winrate }}</span>
         <span>Win Rate %</span>
       </div>
-      <div class="row">
+      <div class="row grey-box">
         <span>{{ stats.average }}</span>
         <span>Avg. Guess</span>
       </div>

@@ -52,7 +52,8 @@ class App {
     ]);
     $this->twig->addExtension(new DebugExtension());
     $this->twig->addExtension(new IntlExtension());
-    $this->auth = new Auth($this->db);
+//    $this->auth = new Auth($this->db);
+    $this->auth = new Auth($this->db,$_SERVER['REMOTE_ADDR'],"",false);
     $this->user = new User($this->db);
     $this->appData = new appData;
     
