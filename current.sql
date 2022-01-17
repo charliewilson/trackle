@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jan 16, 2022 at 10:33 PM
+-- Generation Time: Jan 17, 2022 at 09:43 PM
 -- Server version: 8.0.27-0ubuntu0.21.10.1
 -- PHP Version: 8.0.8
 
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `trackle`
 --
+CREATE DATABASE IF NOT EXISTS `trackle` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
+USE `trackle`;
 
 -- --------------------------------------------------------
 
@@ -49,7 +51,8 @@ INSERT INTO `results` (`id`, `user_id`, `puzzle_no`, `guesses_no`, `guess_data`)
 (7, 1, 210, '2', 'a:2:{i:0;s:5:\"XYYYX\";i:1;s:5:\"GGGGG\";}'),
 (8, 1, 211, '3', 'a:3:{i:0;s:5:\"GXXYX\";i:1;s:5:\"GXYYX\";i:2;s:5:\"GGGGG\";}'),
 (9, 1, 202, '5', 'a:5:{i:0;s:5:\"XYXXX\";i:1;s:5:\"XXXGX\";i:2;s:5:\"XXYGY\";i:3;s:5:\"GGGGX\";i:4;s:5:\"GGGGG\";}'),
-(10, 1, 203, '3', 'a:3:{i:0;s:5:\"XXXXX\";i:1;s:5:\"XYXXY\";i:2;s:5:\"GGGGG\";}');
+(10, 1, 203, '3', 'a:3:{i:0;s:5:\"XXXXX\";i:1;s:5:\"XYXXY\";i:2;s:5:\"GGGGG\";}'),
+(12, 1, 212, '4', 'a:4:{i:0;s:5:\"GXYYX\";i:1;s:5:\"GXXYY\";i:2;s:5:\"GYYYX\";i:3;s:5:\"GGGGG\";}');
 
 -- --------------------------------------------------------
 
@@ -76,8 +79,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `email`, `password`, `username`, `status`, `verified`, `resettable`, `roles_mask`, `registered`, `last_login`, `force_logout`) VALUES
-(1, 'me@charliewilson.co.uk', '$2y$10$ncmJ5hzqSh/7PCKjv7dhXujM85Hevxfnrba7c/FEu0TTrFM61uY.u', 'charlie', 0, 1, 1, 0, 1585749826, 1642371996, 109),
-(2, 'test@email.com', '$2y$10$UTAHR5Sl5PmOX31HJ1QgZOlLEbiFyITpSw1KSdyJwcDdePiFS9u6W', 'test', 0, 1, 1, 0, 1642371242, 1642371710, 0);
+(1, 'me@charliewilson.co.uk', '$2y$10$7b/XFHyai8gWxoDLfcPAe..GcARkFFzIDpqkstrKLIjMAZRD/lSgW', 'charlie', 0, 1, 1, 0, 1585749826, 1642454689, 112);
 
 -- --------------------------------------------------------
 
@@ -223,6 +225,12 @@ ALTER TABLE `users_data`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `users_remembered`
+--
+ALTER TABLE `users_remembered`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -230,7 +238,7 @@ ALTER TABLE `users_data`
 -- AUTO_INCREMENT for table `results`
 --
 ALTER TABLE `results`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -239,10 +247,22 @@ ALTER TABLE `users`
   MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT for table `users_confirmations`
+--
+ALTER TABLE `users_confirmations`
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `users_data`
 --
 ALTER TABLE `users_data`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `users_remembered`
+--
+ALTER TABLE `users_remembered`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
