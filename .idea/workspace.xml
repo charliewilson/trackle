@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bf6f46f9-f080-4974-a29a-93b52a10bac6" name="Changes" comment="Icon and small style changes">
+    <list default="true" id="bf6f46f9-f080-4974-a29a-93b52a10bac6" name="Changes" comment="Current.sql final before launch!">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/current.sql" beforeDir="false" afterPath="$PROJECT_DIR$/current.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -113,7 +115,7 @@
       <workItem from="1642184633877" duration="3077000" />
       <workItem from="1642242366658" duration="614000" />
       <workItem from="1642323452444" duration="32942000" />
-      <workItem from="1642443187721" duration="8987000" />
+      <workItem from="1642443187721" duration="11117000" />
     </task>
     <task id="LOCAL-00001" summary="Cloned from ledge.club">
       <created>1641901299367</created>
@@ -185,7 +187,14 @@
       <option name="project" value="LOCAL" />
       <updated>1642455167274</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Current.sql final before launch!">
+      <created>1642455860137</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1642455860137</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -225,6 +234,7 @@
     <MESSAGE value="weird fix for chrome-only bug" />
     <MESSAGE value="Functionally complete!" />
     <MESSAGE value="Icon and small style changes" />
-    <option name="LAST_COMMIT_MESSAGE" value="Icon and small style changes" />
+    <MESSAGE value="Current.sql final before launch!" />
+    <option name="LAST_COMMIT_MESSAGE" value="Current.sql final before launch!" />
   </component>
 </project>

@@ -20,7 +20,7 @@ SET time_zone = "+00:00";
 --
 -- Database: `trackle`
 --
-CREATE DATABASE IF NOT EXISTS `trackle` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
+CREATE DATABASE IF NOT EXISTS `trackle` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE `trackle`;
 
 -- --------------------------------------------------------
@@ -35,7 +35,7 @@ CREATE TABLE `results` (
   `puzzle_no` int NOT NULL,
   `guesses_no` text NOT NULL,
   `guess_data` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `results`

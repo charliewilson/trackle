@@ -180,6 +180,8 @@ hr {
   transition:transform .1s, box-shadow .1s;
   display:inline-block;
   background:#FFF;
+  -webkit-appearance: none;
+  color:#000;
 }
 
 .button:hover {
