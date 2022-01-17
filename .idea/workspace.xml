@@ -4,15 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bf6f46f9-f080-4974-a29a-93b52a10bac6" name="Changes" comment="Mobile style for result page">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/controllers/page.controller.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/page.controller.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/trackle.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/trackle.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/login/login.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/login/login.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/person/person.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/person/person.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/results/addresult.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/results/addresult.twig" afterDir="false" />
+    <list default="true" id="bf6f46f9-f080-4974-a29a-93b52a10bac6" name="Changes" comment="&quot;add&quot; style complete">
       <change beforePath="$PROJECT_DIR$/assets/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -162,7 +155,14 @@
       <option name="project" value="LOCAL" />
       <updated>1642361752696</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="&quot;add&quot; style complete">
+      <created>1642437924105</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1642437924105</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -198,6 +198,7 @@
     <MESSAGE value="More theme stuuf" />
     <MESSAGE value="Almost complete!&#10;&#10; - New user flow, settings, and leaderboard need implementing&#10; - Design of login and add puzzle need implementing" />
     <MESSAGE value="Mobile style for result page" />
-    <option name="LAST_COMMIT_MESSAGE" value="Mobile style for result page" />
+    <MESSAGE value="&quot;add&quot; style complete" />
+    <option name="LAST_COMMIT_MESSAGE" value="&quot;add&quot; style complete" />
   </component>
 </project>
