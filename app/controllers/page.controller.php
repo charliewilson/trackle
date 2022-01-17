@@ -124,7 +124,7 @@ class PageController {
       $username = filter_var($_POST['username'], FILTER_SANITIZE_STRING);
       $password = filter_var($_POST['password'], FILTER_SANITIZE_STRING);
       try {
-        $this->app->auth->loginWithUsername($username, $password);
+        $this->app->auth->loginWithUsername($username, $password, (int)(60 * 60 * 24 * 365.25));
         header("Location: /");
       } catch (UnknownUsernameException | InvalidPasswordException) {
         header("Location: /login?invalid");
