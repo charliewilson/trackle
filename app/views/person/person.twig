@@ -2,7 +2,7 @@
 {% set title = person.username %}
 
 {% block header %}
-  <a class="button" href="/r/add">Add Result</a><a class="button" href="/settings">Settings</a><a class="button" href="/logout">Logout</a>
+  {% if (me.username == person.username) %}<a class="button" href="/r/add">Add Result</a>{% endif %}<a class="button" href="/settings">Settings</a><a class="button" href="/logout">Logout</a>
 {% endblock %}
 
 {% block main %}
@@ -31,7 +31,7 @@
   </div>
 
   <div class="cards-container">
-    {% if not results %}<p>No results yet! <a href="/r/add">Add one?</a></p>{% else %}
+    {% if not results %}<p>No results yet!{% if (me.username == person.username) %} <a href="/r/add">Add one?</a>{% endif %}</p>{% else %}
   {% for result in results %}{{ result.render|raw }}{% endfor %}
     {% endif %}
   </div>

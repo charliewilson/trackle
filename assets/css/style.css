@@ -73,6 +73,21 @@ header .button:last-of-type {
   }
 }
 
+.message {
+  background: #FFCCD1;
+  text-align:center;
+  padding:10px;
+  border-radius: var(--card-radius);
+  margin-bottom:20px;
+  font-size:14px;
+  color:#333;
+}
+
+hr {
+  border:1px solid var(--border-colour);
+  margin:40px 0;
+}
+
 .container {
   width:100%;
   max-width:960px;
@@ -106,7 +121,11 @@ header .button:last-of-type {
 .container.login .login-form input[type='text'],
 .container.login .login-form input[type='email'],
 .container.login .login-form input[type='password'],
-.container.login .login-form input[type='submit'] {
+.container.login .login-form input[type='submit'],
+.settings-container input[type='text'],
+.settings-container input[type='email'],
+.settings-container input[type='password'],
+.settings-container input[type='submit']{
   border: 2px solid var(--border-colour);
   border-radius: var(--card-radius);
   padding:10px;
@@ -129,16 +148,6 @@ header .button:last-of-type {
   align-items: center;
 }
 
-.container.login .login-form-message {
-  background: #FFCCD1;
-  text-align:center;
-  padding:10px;
-  border-radius: var(--card-radius);
-  margin-bottom:20px;
-  font-size:14px;
-  color:#333;
-}
-
 .container.login .login-form-footer p {
   margin:0;
 }
@@ -153,6 +162,17 @@ header .button:last-of-type {
   margin-bottom:20px;
 }
 
+.settings-container {
+  box-sizing: border-box;
+}
+
+.settings-container input:not([type='submit']) {
+  display:block;
+  width:100%;
+  box-sizing:border-box;
+  margin:10px 0;
+}
+
 .button {
   border:2px solid var(--border-colour);
   padding: 10px;
@@ -165,6 +185,10 @@ header .button:last-of-type {
 .button:hover {
   transform: translate(-2px, -2px);
   box-shadow: var(--shadow);
+}
+
+.button.deletebutton {
+  color: #a80000;
 }
 
 .graph-container .graph {
@@ -342,6 +366,11 @@ header .button:last-of-type {
   margin-top:0;
 }
 
+.result-leaderboard .inner p:last-child,
+.add-result-help .inner p:last-child {
+  margin-bottom:0;
+}
+
 .result-pagination {
   margin-top:20px;
   display:flex;
@@ -363,7 +392,8 @@ header .button:last-of-type {
 }
 
 .centered-container {
-  width:70%;
+  max-width:672px;
+  width:100%;
   margin:auto;
 }
 
@@ -373,12 +403,23 @@ header .button:last-of-type {
 }
 
 .add-result-container .add-result-help {
-  margin-right:20px;
   flex:1;
 }
 
 .add-result-container .add-result-form {
   flex:1;
+  margin-right:20px;
+}
+
+@media (max-width: 650px) {
+  .add-result-container {
+    display:block;
+  }
+
+  .add-result-container .add-result-form {
+    margin-right:0;
+    margin-bottom:20px;
+  }
 }
 
 .add-result-container .add-result-form p {

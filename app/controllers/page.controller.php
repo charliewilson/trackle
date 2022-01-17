@@ -16,11 +16,14 @@ use Delight\Auth\UnknownUsernameException;
 
 use Delight\Auth\UserAlreadyExistsException;
 use trackle\Exceptions\CantCreateResultException;
+use trackle\Exceptions\InvalidShareTextException;
+use trackle\Exceptions\PuzzleAlreadyDoneException;
 use trackle\Exceptions\ResultNotFoundException;
 use trackle\Exceptions\UserNotFoundException;
 use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
 use Twig\Error\SyntaxError;
+use TypeError;
 
 class PageController {
   
@@ -80,14 +83,18 @@ class PageController {
     } else {
       //Homepage
       try {
+
+        $message = "";
+
         if (isset($_GET['invalid'])) {
-          echo $this->app->twig->render('login/login.twig',[
-            "message" => "Username or Password is incorrect!"
-          ]);
-        } else {
-          echo $this->app->twig->render('login/login.twig');
+          $message = "Username or Password is incorrect!";
+        } elseif (isset($_GET['ad'])) {
+          $message = "Account deleted successfully. Sorry to see you go!";
         }
 
+        echo $this->app->twig->render('login/login.twig',[
+          "message" => $message
+        ]);
 
       } catch (LoaderError | RuntimeError | SyntaxError $e) {
         $this->errorMessage($e->getMessage());
@@ -138,14 +145,24 @@ class PageController {
     } else {
       //Homepage
       try {
-        if (isset($_GET['invalid'])) {
-          echo $this->app->twig->render('login/register.twig',[
-            "message" => "Username or Password is incorrect!"
-          ]);
-        } else {
-          echo $this->app->twig->render('login/register.twig');
+
+        $message = "";
+
+        if (isset($_GET['ie'])) {
+          $message = "Invalid email";
+        } elseif (isset($_GET['ip'])) {
+          $message = "Invalid password";
+        } elseif (isset($_GET['eae'])) {
+          $message = "Email address already exists, please login";
+        } elseif (isset($_GET['uae'])) {
+          $message = "Username already exists, please login";
+        } elseif (isset($_GET['tmr'])) {
+          $message = "Too many requests, please try again later.";
         }
 
+        echo $this->app->twig->render('login/register.twig',[
+          "message" => $message
+        ]);
 
       } catch (LoaderError | RuntimeError | SyntaxError $e) {
         $this->errorMessage($e->getMessage());
@@ -168,19 +185,19 @@ class PageController {
         header("Location: /");
       }
       catch (InvalidEmailException) {
-        header("Location: /register?m=ie");
+        header("Location: /register?ie");
       }
       catch (InvalidPasswordException) {
-        header("Location: /register?m=ip");
+        header("Location: /register?ip");
       }
       catch (UserAlreadyExistsException) {
-        header("Location: /register?m=eae");
+        header("Location: /register?eae");
       }
       catch (DuplicateUsernameException) {
-        header("Location: /register?m=uae");
+        header("Location: /register?uae");
       }
       catch (TooManyRequestsException) {
-        header("Location: /register?m=tmr");
+        header("Location: /register?tmr");
       }
       catch (
       AttemptCancelledException |
@@ -203,20 +220,20 @@ class PageController {
         $this->app->auth->changeEmail($email, function($s, $t){
           $this->app->auth->confirmEmail($s, $t);
         });
-        header("Location: /settings?m=ec");
+        header("Location: /settings?ec");
       } catch (AuthError $e) {
         die($e->getmessage());
-        header("Location: /settings?m=ae");
+        header("Location: /settings?ae");
       } catch (InvalidEmailException) {
-        header("Location: /settings?m=ie");
+        header("Location: /settings?ie");
       } catch (NotLoggedInException) {
         header("Location: /");
       } catch (TooManyRequestsException) {
-        header("Location: /settings?m=tmr");
+        header("Location: /settings?tmr");
       } catch (UserAlreadyExistsException) {
-        header("Location: /settings?m=uae");
+        header("Location: /settings?uae");
       } catch (EmailNotVerifiedException) {
-        header("Location: /settings?m=env");
+        header("Location: /settings?env");
       }
     }
   }
@@ -230,19 +247,19 @@ class PageController {
       $newpassconfirm = filter_var($_POST['newpassconfirm'], FILTER_SANITIZE_STRING);
       try {
         if($newpass != $newpassconfirm) {
-          header("Location: /settings?m=pdm");
+          header("Location: /settings?pdm");
         } else {
           $this->app->auth->changePassword($oldpass, $newpass);
-          header("Location: /settings?m=pc");
+          header("Location: /settings?pc");
         }
       } catch (AuthError) {
-        header("Location: /settings?m=ae");
+        header("Location: /settings?ae");
       } catch (InvalidPasswordException) {
-        header("Location: /settings?m=ip");
+        header("Location: /settings?ip");
       } catch (NotLoggedInException) {
         header("Location: /");
       } catch (TooManyRequestsException) {
-        header("Location: /settings?m=tmr");
+        header("Location: /settings?tmr");
       }
     }
   }
@@ -318,7 +335,7 @@ class PageController {
       if ($won == 0) {
         $average = "0";
       } else {
-        $average = $sum / $played;
+        $average = round($sum / $played, 2);
 //        $average = round(($won / $played) * 100);
       }
 
@@ -390,12 +407,44 @@ class PageController {
     die();
   }
 
+  public function resultDeleteGet($params) {
+    try {
+      $user = $this->app->personController->getByUsername($params['name']);
+      $result = $this->app->resultController->getSingleFromUser($user->id(), $params['puzzleno']);
+      $me = ($this->app->auth->isLoggedIn()) ? $this->app->personController->getMe() : false;
+
+      if ($user->id() == $me->id()) {
+        if ($this->app->resultController->delete($result->puzzleNo(), $user)) {
+          header("Location: /u/".$user->username()."?rd");
+        } else {
+          header("Location: /u/".$user->username()."/".$result->puzzleNo()."?cd");
+        }
+      } else {
+        header("Location: /u/".$user->username()."/".$result->puzzleNo()."?cd");
+      }
+
+    } catch (ResultNotFoundException | UserNotFoundException $e) {
+      $this->errorMessage($e->getMessage());
+    }
+    die();
+  }
+
   public function resultAddGet() {
     if ($this->app->auth->isLoggedIn()){
       try {
         $me = $this->app->personController->getMe();
+
+        $message = "";
+
+        if (isset($_GET['pad'])) {
+          $message = "You've already provided a solution to this wordle!";
+        } elseif (isset($_GET['ist'])) {
+          $message = "Unable to read pasted solution. Please try again!";
+        }
+
         echo $this->app->twig->render('results/addresult.twig',[
           "me" => $me,
+          "message" => $message,
           "breadcrumb" => [
             ["link" => "/u/" . $me->username(), "display" => $me->username()],
             ["link" => false, "display" => "add"]
@@ -418,7 +467,11 @@ class PageController {
         $result = $this->app->resultController::parseFromShare($_POST['text']);
         $this->app->resultController->create($result['puzzle_no'], $result['guesses_no'], $result['lines'], $user);
 
-        header("Location: /u/".$user->username());
+        header("Location: /u/" . $user->username());
+      } catch (TypeError | InvalidShareTextException) {
+        header("Location: /r/add?ist");
+      } catch (PuzzleAlreadyDoneException) {
+        header("Location: /r/add?pad");
       } catch (CantCreateResultException) {
         $this->errorMessage("Result cannot be created!");
       }
@@ -434,8 +487,30 @@ class PageController {
     if ($this->app->auth->isLoggedIn()){
       try {
         $me = $this->app->personController->getMe();
+
+        $message = "";
+
+        if (isset($_GET['ec'])) {
+          $message = "Email changed successfully";
+        } elseif (isset($_GET['ae'])) {
+          $message = "Auth Error occurred, please try again later.";
+        } elseif (isset($_GET['ie'])) {
+          $message = "Invalid email";
+        } elseif (isset($_GET['tmr'])) {
+          $message = "Too many requests, please try again later.";
+        } elseif (isset($_GET['pc'])) {
+          $message = "Password changed successfully";
+        } elseif (isset($_GET['ip'])) {
+          $message = "Old password is incorrect, please try again";
+        } elseif (isset($_GET['pdm'])) {
+          $message = "New and confirmed password don't match, please try again";
+        } elseif (isset($_GET['uae'])) {
+          $message = "This email belongs to another user.";
+        }
+
         echo $this->app->twig->render('settings/settings.twig', [
           "me" => $me,
+          "message" => $message,
           "breadcrumb" => [
             ["link" => "/u/".$me->username(), "display" => $me->username()],
             ["link" => false, "display" => "settings"]
@@ -443,6 +518,67 @@ class PageController {
         ]);
       } catch (LoaderError | RuntimeError | SyntaxError $e) {
         $this->errorMessage($e->getMessage());
+      }
+      die();
+    } else {
+      header("Location: /login");
+    }
+  }
+
+  public function deleteAccountGet() {
+    if ($this->app->auth->isLoggedIn()){
+      try {
+        $me = $this->app->personController->getMe();
+
+        $message = "";
+
+        if (isset($_GET['ae'])) {
+          $message = "Auth Error occurred, please try again later.";
+        } elseif (isset($_GET['tmr'])) {
+          $message = "Too many requests, please try again later.";
+        } elseif (isset($_GET['ip'])) {
+          $message = "Password is incorrect, please try again";
+        }
+
+        echo $this->app->twig->render('settings/delete_account.twig', [
+          "me" => $me,
+          "message" => $message,
+          "breadcrumb" => [
+            ["link" => "/u/".$me->username(), "display" => $me->username()],
+            ["link" => false, "display" => "settings"]
+          ],
+        ]);
+      } catch (LoaderError | RuntimeError | SyntaxError $e) {
+        $this->errorMessage($e->getMessage());
+      }
+      die();
+    } else {
+      header("Location: /login");
+    }
+  }
+
+  public function deleteAccountPost() {
+    if ($this->app->auth->isLoggedIn()){
+      try {
+        $me = $this->app->personController->getMe();
+        $pass = filter_var($_POST['password'], FILTER_SANITIZE_STRING);
+
+        if ($this->app->auth->reconfirmPassword($pass)) {
+          $this->app->resultController->deleteAllFromUser($me);
+          $this->app->auth->admin()->deleteUserById($me->id());
+          $this->app->auth->logOutEverywhere();
+          header("Location: /login?ad");
+        } else {
+          header("Location: /settings/delete?ip");
+        }
+      } catch (LoaderError | RuntimeError | SyntaxError $e) {
+        $this->errorMessage($e->getMessage());
+      } catch (AuthError | UnknownIdException) {
+        header("Location: /settings/delete?ae");
+      } catch (TooManyRequestsException) {
+        header("Location: /settings/delete?tmr");
+      } catch (NotLoggedInException) {
+        header("Location: /login");
       }
       die();
     } else {

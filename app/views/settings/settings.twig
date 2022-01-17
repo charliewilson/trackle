@@ -6,16 +6,20 @@
 {% endblock %}
 
 {% block main %}
-  <div class="settings-container">
+  <div class="settings-container grey-box centered-container">
+    {% if message %}
+    <div class="message">{{ message }}</div>
+    {% endif %}
     <form action="/settings/email" method="post">
       <p>
         <label for="settings_email">Edit Email</label>
         <input id="settings_email" name="email" placeholder="Email" type="email" value="{{ me.email }}">
       </p>
       <p>
-        <input type="submit" value="Save">
+        <input class="button" type="submit" value="Save Email">
       </p>
     </form>
+    <hr>
     <form action="/settings/password" method="post">
       <p>
         <label for="settings_oldpass">Change Password</label>
@@ -24,10 +28,10 @@
         <input id="settings_newpass_confirm" name="newpassconfirm" placeholder="Confirm New Password" type="password">
       </p>
       <p>
-        <input type="submit" value="Save">
+        <input class="button" type="submit" value="Change Password">
       </p>
     </form>
-
-    <a class="deletebutton" href="/settings/delete">Delete Account</a>
+    <hr>
+    <a class="button deletebutton" href="/settings/delete">Delete Account</a>
   </div>
 {% endblock %}

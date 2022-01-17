@@ -35,12 +35,13 @@ try {
     //Users
     ['GET', '/u/[a:name]', 'personGet'],
     ['GET', '/u/[a:name]/[i:puzzleno]', 'resultGet'],
+    ['GET', '/u/[a:name]/[i:puzzleno]/delete', 'resultDeleteGet'],
     //Settings
     ['GET', '/settings', 'settingsGet'],
     ['POST', '/settings/email', 'changeEmailPost'],
     ['POST', '/settings/password', 'changePasswordPost'],
-    // ['GET', '/settings/delete', 'deleteAccountGet'],
-    // ['POST', '/settings/delete', 'deleteAccountPost'],
+     ['GET', '/settings/delete', 'deleteAccountGet'],
+     ['POST', '/settings/delete', 'deleteAccountPost'],
   ]);
   
 } catch (Exception $e) {
