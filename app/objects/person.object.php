@@ -72,7 +72,7 @@ class Person {
     if ($won == 0) {
       $average = "0";
     } else {
-      $average = round($sum / $played, 2);
+      $average = number_format(round($sum / $played, 2), 2, '.','');
     }
 
     return [

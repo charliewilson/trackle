@@ -1,0 +1,33 @@
+{% extends 'base.twig' %}
+{% set title = 'Leaderboard' %}
+
+{% block header %}
+  {% if me %}<a class="button" href="/r/add">Add Result</a><a class="button" href="/leaderboard">Leaderboard</a><a class="button" href="/settings">Settings</a><a class="button" href="/logout">Logout</a>{% else %}<a class="button" href="/login">Login / Register</a>{% endif %}
+{% endblock %}
+
+{% block main %}
+  <div class="leaderboard-container grey-box centered-container">
+    <table>
+      <thead>
+        <tr>
+          <th>User</th>
+          <th>Avg. Guess</th>
+          <th>Total Won</th>
+          <th>Total Played</th>
+          <th>Win Rate</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for person in people %}
+        <tr>
+          <td><a href="/u/{{ person.username }}">{{ person.username }}</a></td>
+          <td>{{ person.stats.average }}</td>
+          <td>{{ person.stats.won }}</td>
+          <td>{{ person.stats.played }}</td>
+          <td>{{ person.stats.winrate }}%</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}

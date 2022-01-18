@@ -460,6 +460,33 @@ class PageController {
     }
   }
 
+  public function leaderboardGet() {
+    try {
+
+      $me = ($this->app->auth->isLoggedIn()) ? $this->app->personController->getMe() : false;
+      $users = $this->app->personController->getall();
+
+      usort($users, function($a, $b) {
+        if ($a->stats()['average'] == $b->stats()['average']) {
+          return 0;
+        }
+        return ($a->stats()['average'] > $b->stats()['average']) ? +1 : -1;
+      });
+
+      echo $this->app->twig->render('leaderboard/leaderboard.twig', [
+        "me" => $me,
+        "people" => $users,
+        "breadcrumb" => [
+          ["link" => false, "display" => "leaderboard"]
+        ],
+      ]);
+
+    } catch (ResultNotFoundException | UserNotFoundException | LoaderError | RuntimeError | SyntaxError $e) {
+      $this->errorMessage($e->getMessage());
+    }
+    die();
+  }
+
   //USER
   public function settingsGet() {
     if ($this->app->auth->isLoggedIn()){

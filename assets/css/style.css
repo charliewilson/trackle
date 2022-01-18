@@ -5,6 +5,10 @@
   --tile-black: #202225;
   --tile-clear: #ddd;
 
+  --leaderboard-gold: rgba(255, 195, 74, 0.5);
+  --leaderboard-silver: rgba(204, 204, 204, 0.5);
+  --leaderboard-bronze: rgba(193, 126, 77, 0.5);
+
   --card-radius: 4px;
   --tile-radius: 4px;
   --shadow: 3px 3px 3px rgba(0,0,0,0.1);
@@ -162,7 +166,8 @@ hr {
   margin-bottom:20px;
 }
 
-.settings-container {
+.settings-container,
+.leaderboard-container {
   box-sizing: border-box;
 }
 
@@ -192,6 +197,45 @@ hr {
 .button.deletebutton {
   color: #a80000;
 }
+
+.leaderboard-container {
+  padding:0;
+}
+
+.leaderboard-container table {
+  width:100%;
+  text-align:right;
+  border-collapse:collapse;
+  border-style: hidden;
+}
+
+.leaderboard-container table tbody tr:nth-child(1) {
+  background-color:var(--leaderboard-gold);
+}
+.leaderboard-container table tbody tr:nth-child(2) {
+  background-color:var(--leaderboard-silver);
+}
+.leaderboard-container table tbody tr:nth-child(3) {
+  background-color:var(--leaderboard-bronze);
+}
+
+.leaderboard-container table a {
+  font-weight:bold;
+  color:#000000;
+}
+
+/*.leaderboard-container table,*/
+.leaderboard-container th,
+.leaderboard-container td {
+  border:solid 1px var(--border-colour);
+  padding:5px;
+}
+
+/*.leaderboard-container table td:not(:first-of-type),*/
+/*.leaderboard-container table th:not(:first-of-type) {*/
+/*  width:0.1%;*/
+/*  white-space: nowrap;*/
+/*}*/
 
 .graph-container .graph {
   flex:auto;

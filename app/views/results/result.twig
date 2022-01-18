@@ -2,7 +2,7 @@
 {% set title = result.user.username~" #"~result.puzzleNo %}
 
 {% block header %}
-  {# <a class="button" href="/u/{{ result.user.username }}/{{ result.puzzleNo }}/share">Share</a> #}{% if (me.username == result.user.username) %}<a onclick="return confirm('Are you sure you want to delete this result? This cannot be undone!');" class="button" href="/u/{{ result.user.username }}/{{ result.puzzleNo }}/delete">Delete</a>{% endif %}{% if me %}<a class="button" href="/logout">Logout</a>{% else %}<a class="button" href="/login">Login / Register</a>{% endif %}
+  {# <a class="button" href="/u/{{ result.user.username }}/{{ result.puzzleNo }}/share">Share</a> #}{% if (me.username == result.user.username) %}<a onclick="return confirm('Are you sure you want to delete this result? This cannot be undone!');" class="button" href="/u/{{ result.user.username }}/{{ result.puzzleNo }}/delete">Delete</a>{% endif %}<a class="button" href="/leaderboard">Leaderboard</a>{% if me %}<a class="button" href="/settings">Settings</a><a class="button" href="/logout">Logout</a>{% else %}<a class="button" href="/login">Login / Register</a>{% endif %}
 {% endblock %}
 
 {% block main %}

@@ -28,7 +28,7 @@ try {
     ['POST', '/register', 'registerPost'],
     //Homepage and feed
     // ['GET', '/home', 'homeGet'],
-    //Spots
+    //Results
     ['GET', '/r/[i:id]', 'resultGet'],
     ['GET', '/r/add', 'resultAddGet'],
     ['POST', '/r/add', 'resultAddPost'],
@@ -36,6 +36,8 @@ try {
     ['GET', '/u/[a:name]', 'personGet'],
     ['GET', '/u/[a:name]/[i:puzzleno]', 'resultGet'],
     ['GET', '/u/[a:name]/[i:puzzleno]/delete', 'resultDeleteGet'],
+    //Leaderboard
+    ['GET', '/leaderboard', 'leaderboardGet'],
     //Settings
     ['GET', '/settings', 'settingsGet'],
     ['POST', '/settings/email', 'changeEmailPost'],
