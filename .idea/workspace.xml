@@ -4,13 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bf6f46f9-f080-4974-a29a-93b52a10bac6" name="Changes" comment="Fixed discord shortcode copying bug on android">
-      <change beforePath="$PROJECT_DIR$/.idea/deployment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/deployment.xml" afterDir="false" />
+    <list default="true" id="bf6f46f9-f080-4974-a29a-93b52a10bac6" name="Changes" comment="ACTUALLY fixed discord bug this time lmao">
+      <change afterPath="$PROJECT_DIR$/assets/img/icon.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/controllers/page.controller.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/page.controller.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/controllers/result.controller.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/result.controller.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/objects/result.object.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/objects/result.object.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/person/person.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/person/person.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,6 +86,9 @@
       <recent name="$PROJECT_DIR$/app/views/settings" />
       <recent name="$PROJECT_DIR$/app/views/login" />
       <recent name="$PROJECT_DIR$/app/views" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="\\wsl$\Ubuntu\var\www\trackle\assets\img" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -204,7 +204,14 @@
       <option name="project" value="LOCAL" />
       <updated>1642500717636</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="ACTUALLY fixed discord bug this time lmao">
+      <created>1642504659052</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1642504659052</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -246,6 +253,7 @@
     <MESSAGE value="Icon and small style changes" />
     <MESSAGE value="Current.sql final before launch!" />
     <MESSAGE value="Fixed discord shortcode copying bug on android" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed discord shortcode copying bug on android" />
+    <MESSAGE value="ACTUALLY fixed discord bug this time lmao" />
+    <option name="LAST_COMMIT_MESSAGE" value="ACTUALLY fixed discord bug this time lmao" />
   </component>
 </project>

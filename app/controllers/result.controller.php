@@ -289,6 +289,7 @@ class ResultController {
     $sharestring = str_replace('black_large_square', '⬛', $sharestring);
     $sharestring = str_replace('yellow_square', '🟨', $sharestring);
     $sharestring = str_replace('green_square', '🟩', $sharestring);
+    $sharestring = str_replace(':', '', $sharestring);
 
     return preg_filter("/[^Wordle0-9\/ \x{1F7E9}\x{2B1B}\x{2B1C}\x{1F7E8}\n]+/u", "", $sharestring);
   }
