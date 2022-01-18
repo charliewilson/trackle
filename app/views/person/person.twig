@@ -41,10 +41,10 @@
   <script src="/assets/js/chart.js"></script>
   <script>
     const data = {
-      labels: [{% for result in graphData %}{{ result.number }} ,{% endfor %}],
+      labels: [{% for result in graphData|keys %}{{ result }} ,{% endfor %}],
       datasets: [{
         label: 'Guesses',
-        data: [{% for result in graphData %}{{ result.guesses }} ,{% endfor %}],
+        data: [{% for result in graphData %}{% if (result == 'X') %}'X'{% else %}{{ result ?? 'null'}}{% endif %} ,{% endfor %}],
         fill: false
       }]
     };
@@ -67,18 +67,14 @@
         animation: false,
         scales: {
           y: {
-            beginAtZero: true,
-            min: 0,
-            max: 6,
+            type: 'category',
+            labels: ['X', 6, 5, 4, 3, 2, 1],
             title: {
               display:true,
               text: "Number of Guesses"
             }
           },
           x: {
-            type: 'logarithmic',
-            min: {{ graphData|first.number }},
-            max: {{ graphData|last.number }},
             title: {
               display: true,
               text: "Puzzle Number"

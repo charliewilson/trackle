@@ -319,17 +319,22 @@ class PageController {
       $played = 0;
       $sum = 0;
 
-
+      for ($i = $firstPuzzle; $i < ($lastPuzzle + 1); $i ++) {
+        $graphData[$i] = null;
+      }
 
       foreach (array_reverse($results) as $result) {
-        $guess = ($result->guessesNo() == "X") ? null : $result->guessesNo();
-        $graphData[] = ["number" => $result->puzzleNo(), "guesses" => $guess];
+        // $guess = ($result->guessesNo() == "X") ? null : $result->guessesNo();
+        $guess = $result->guessesNo();
+        $graphData[$result->puzzleNo()] = $guess;
         $played += 1;
         if ($result->guessesNo() != "0") {
           $won += 1;
           $sum += ($result->guessesNo() == "X") ? 0 : $result->guessesNo();
         }
       }
+
+//      die(print_r($graphData));
 
       if ($played == 0) {
         $winrate = "n/a";
