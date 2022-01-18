@@ -36,6 +36,22 @@ class Result {
     return unserialize($this->guess_data);
   }
 
+  public function leaderboard(): array {
+    $results = $this->app->resultController->getByPuzzleNo($this->puzzleNo());
+
+    usort($results, function($a, $b) {
+      $aguess = ($a->guessesNo() == "X") ? 7 : $a->guessesNo();
+      $bguess = ($b->guessesNo() == "X") ? 7 : $b->guessesNo();
+
+      if ($aguess == $bguess) {
+        return 0;
+      }
+      return ($aguess > $bguess) ? +1 : -1;
+    });
+
+    return $results;
+  }
+
   public function toShare(): string {
     $lines[] = "Wordle ".$this->puzzleNo()." ".$this->guessesNo()."/6";
 

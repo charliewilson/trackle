@@ -25,7 +25,14 @@
     <div class="result-leaderboard">
       <div class="header">Leaderboard</div>
       <div class="inner">
-        <p>No data yet.</p>
+        {% for leaderResult in result.leaderboard %}
+          <a href="/u/{{ leaderResult.user.username }}/{{ leaderResult.puzzleNo }}">
+            <div class="result-leaderboard-line button {% if result.user.username == leaderResult.user.username %}self{% endif %}">
+              <p>{{ leaderResult.user.username }}</p>
+              <p>{{ leaderResult.guessesNo }} / 6</p>
+            </div>
+          </a>
+        {% endfor %}
       </div>
     </div>
   </div>

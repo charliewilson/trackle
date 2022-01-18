@@ -9,6 +9,8 @@
   --leaderboard-silver: rgba(204, 204, 204, 0.5);
   --leaderboard-bronze: rgba(193, 126, 77, 0.5);
 
+  --leaderboard-highlight: var(--border-colour);
+
   --card-radius: 4px;
   --tile-radius: 4px;
   --shadow: 3px 3px 3px rgba(0,0,0,0.1);
@@ -369,6 +371,7 @@ hr {
 .result-container {
   display:flex;
   flex-direction:row;
+  align-items:baseline;
 }
 
 .result-container .result-card {
@@ -408,12 +411,33 @@ hr {
   flex:1;
 }
 
-.result-leaderboard .inner p,
+.result-leaderboard .inner a .result-leaderboard-line.button {
+  display:flex;
+  flex-direction:row;
+  justify-content: space-between;
+}
+
+.result-leaderboard .inner a .result-leaderboard-line.self {
+  background-color:var(--leaderboard-highlight);
+}
+
+.result-leaderboard .inner a {
+  display:block;
+  margin-bottom:20px;
+}
+
+.result-leaderboard .inner a:last-of-type {
+  margin-bottom:0;
+}
+
+.result-leaderboard .inner p {
+  margin:0;
+  color:#000;
+}
+
 .add-result-help .inner p {
   margin-top:0;
 }
-
-.result-leaderboard .inner p:last-child,
 .add-result-help .inner p:last-child {
   margin-bottom:0;
 }
