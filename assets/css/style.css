@@ -74,6 +74,7 @@ header .button:last-of-type {
 
   header .button {
     margin-right:0;
+    font-size: 13px;
   }
 }
 
