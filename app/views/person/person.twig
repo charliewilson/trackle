@@ -54,12 +54,17 @@
       data: data,
       options: {
         maintainAspectRatio: true,
-        backgroundColor: "#78b158",
         elements: {
           line: {
             borderColor: "#262222"
           },
           point: {
+            // backgroundColor: "#78b158",
+            backgroundColor: function(context) {
+              const index = context.dataIndex;
+              const value = context.dataset.data[index];
+              return (value === 'X') ? "#a80000" : "#78b158";
+            },
             radius: 6,
             hoverRadius: 8
           }
