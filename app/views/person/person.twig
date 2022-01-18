@@ -76,6 +76,9 @@
             }
           },
           x: {
+            type: 'logarithmic',
+            min: {{ graphData|first.number }},
+            max: {{ graphData|last.number }},
             title: {
               display: true,
               text: "Puzzle Number"

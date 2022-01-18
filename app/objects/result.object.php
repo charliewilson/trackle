@@ -29,7 +29,7 @@ class Result {
   }
 
   public function guessesNo(): string|int {
-    return ($this->guesses_no === "X") ? "X" : (int)$this->guesses_no;
+    return ($this->guesses_no == "") ? "X" : (int)$this->guesses_no;
   }
 
   public function guesses(): array {

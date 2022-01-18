@@ -283,6 +283,13 @@ class ResultController {
   }
 
   public static function sanitiseShare($sharestring): string {
+
+    //Replace discord/github/slack shortcodes with relevant emojis
+    $sharestring = str_replace('white_large_square', '⬜', $sharestring);
+    $sharestring = str_replace('black_large_square', '⬛', $sharestring);
+    $sharestring = str_replace('yellow_square', '🟨', $sharestring);
+    $sharestring = str_replace('green_square', '🟩', $sharestring);
+
     return preg_filter("/[^Wordle0-9\/ \x{1F7E9}\x{2B1B}\x{2B1C}\x{1F7E8}\n]+/u", "", $sharestring);
   }
 
@@ -316,25 +323,17 @@ class ResultController {
           str_contains($line, '⬛') ||
           str_contains($line, '⬜') ||
           str_contains($line, '🟨') ||
-          str_contains($line, '🟩') ||
-          str_contains($line, ':white_large_square:') ||
-          str_contains($line, ':black_large_square:') ||
-          str_contains($line, ':yellow_square:') ||
-          str_contains($line, ':green_square:')
+          str_contains($line, '🟩')
         ) {
           //Black/White Square - not in word
           $lineProcessed = str_replace('⬛', 'X', $line);
           $lineProcessed = str_replace('⬜', 'X', $lineProcessed);
-          $lineProcessed = str_replace(':white_large_square:', 'X', $lineProcessed);
-          $lineProcessed = str_replace(':black_large_square:', 'X', $lineProcessed);
 
           //Yellow Square - in word; wrong position
           $lineProcessed = str_replace('🟨', 'Y', $lineProcessed);
-          $lineProcessed = str_replace(':yellow_square:', 'Y', $lineProcessed);
 
           //Green Square - in word; right position
           $lineProcessed = str_replace('🟩', 'G', $lineProcessed);
-          $lineProcessed = str_replace(':green_square:', 'G', $lineProcessed);
 
           //Strip any spaces
           $lineProcessed = str_replace(' ', '', $lineProcessed);

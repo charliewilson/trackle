@@ -310,11 +310,16 @@ class PageController {
       $person = $this->app->personController->getByUsername($params['name']);
       $results = $this->app->resultController->getFromUser($person->id(), ["newestFirst" => true]);
 
+      $resultsReversed = array_reverse($results);
+      $firstPuzzle = (int)$resultsReversed[0]->puzzleNo();
+      $lastPuzzle = (int)end($resultsReversed)->puzzleNo();
       $graphData = [];
 
       $won = 0;
       $played = 0;
       $sum = 0;
+
+
 
       foreach (array_reverse($results) as $result) {
         $guess = ($result->guessesNo() == "X") ? null : $result->guessesNo();
@@ -322,7 +327,7 @@ class PageController {
         $played += 1;
         if ($result->guessesNo() != "0") {
           $won += 1;
-          $sum += $result->guessesNo();
+          $sum += ($result->guessesNo() == "X") ? 0 : $result->guessesNo();
         }
       }
 
@@ -336,7 +341,6 @@ class PageController {
         $average = "0";
       } else {
         $average = round($sum / $played, 2);
-//        $average = round(($won / $played) * 100);
       }
 
       $me = ($this->app->auth->isLoggedIn()) ? $this->app->personController->getMe() : false;
