@@ -60,6 +60,8 @@ class Person {
       if ($result->guessesNo() != "X") {
         $won += 1;
         $sum += $result->guessesNo();
+      } else {
+        $sum += 7;
       }
     }
 
