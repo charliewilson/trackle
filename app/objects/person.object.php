@@ -4,13 +4,11 @@ use PDO;
 
 class Person {
   
-  private $app;
+  private App $app;
   
   private $id;
   private $email;
   private $username;
-  private $groups;
-  private $spots;
   
   /**
    * Person constructor.
@@ -23,29 +21,68 @@ class Person {
   /**
    * @return int
    */
-  public function id() {
+  public function id(): int {
     return intval($this->id);
   }
   
   /**
    * @return string
    */
-  public function email() {
+  public function email(): string {
     return $this->email;
   }
   
   /**
    * @return string
    */
-  public function username() {
+  public function username(): string {
     return $this->username;
   }
 
   /**
-   * @return Spot[]
+   * @return Result[]
    */
-  public function results() {
+  public function results(): array {
     return $this->app->resultController->getFromUser($this->id());
+  }
+
+  /**
+   * @return array
+   */
+  public function stats(): array {
+
+    $won = 0;
+    $played = 0;
+    $sum = 0;
+
+    foreach (array_reverse($this->results()) as $result) {
+      $played += 1;
+      if ($result->guessesNo() != "X") {
+        $won += 1;
+        $sum += $result->guessesNo();
+      }
+    }
+
+    if ($played == 0) {
+      $winrate = "n/a";
+    } else {
+      $winrate = round(($won / $played) * 100);
+    }
+
+    if ($won == 0) {
+      $average = "0";
+    } else {
+      $average = round($sum / $played, 2);
+    }
+
+    return [
+      "won" => $won,
+      "played" => $played,
+      "winrate" => $winrate,
+      "total" => $sum,
+      "average" => $average
+    ];
+
   }
 
 }

@@ -315,37 +315,12 @@ class PageController {
       $lastPuzzle = (int)end($resultsReversed)->puzzleNo();
       $graphData = [];
 
-      $won = 0;
-      $played = 0;
-      $sum = 0;
-
       for ($i = $firstPuzzle; $i < ($lastPuzzle + 1); $i ++) {
         $graphData[$i] = null;
       }
 
       foreach (array_reverse($results) as $result) {
-        // $guess = ($result->guessesNo() == "X") ? null : $result->guessesNo();
-        $guess = $result->guessesNo();
-        $graphData[$result->puzzleNo()] = $guess;
-        $played += 1;
-        if ($result->guessesNo() != "0") {
-          $won += 1;
-          $sum += ($result->guessesNo() == "X") ? 0 : $result->guessesNo();
-        }
-      }
-
-//      die(print_r($graphData));
-
-      if ($played == 0) {
-        $winrate = "n/a";
-      } else {
-        $winrate = round(($won / $played) * 100);
-      }
-
-      if ($won == 0) {
-        $average = "0";
-      } else {
-        $average = round($sum / $played, 2);
+        $graphData[$result->puzzleNo()] = $result->guessesNo();
       }
 
       $me = ($this->app->auth->isLoggedIn()) ? $this->app->personController->getMe() : false;
@@ -355,13 +330,7 @@ class PageController {
         "person" => $person,
         "results" => $results,
         "graphData" => $graphData,
-        "stats" => [
-          "won" => $won,
-          "played" => $played,
-          "winrate" => $winrate,
-          "total" => $sum,
-          "average" => $average,
-        ],
+        "stats" => $person->stats(),
         "breadcrumb" => [
           ["link" => false, "display" => $person->username()]
         ],
