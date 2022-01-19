@@ -19,7 +19,7 @@
       </thead>
       <tbody>
       {% for person in people %}
-        <tr>
+        <tr class="{% if person.stats.average == awards.gold %}gold{% elseif person.stats.average == awards.silver %}silver{% elseif person.stats.average == awards.bronze %}bronze{% endif %}">
           <td><a href="/u/{{ person.username }}">{{ person.username }}</a></td>
           <td>{{ person.stats.average }}</td>
           <td>{{ person.stats.won }}</td>

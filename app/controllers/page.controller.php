@@ -473,9 +473,22 @@ class PageController {
         return ($a->stats()['average'] > $b->stats()['average']) ? +1 : -1;
       });
 
+      $topthree = [];
+
+      foreach ($users as $user) {
+        $topthree[] = $user->stats()['average'];
+      }
+
+      $topthree = array_values(array_unique($topthree));
+
       echo $this->app->twig->render('leaderboard/leaderboard.twig', [
         "me" => $me,
         "people" => $users,
+        "awards" => [
+          "gold" => $topthree[0],
+          "silver" => $topthree[1],
+          "bronze" => $topthree[2]
+        ],
         "breadcrumb" => [
           ["link" => false, "display" => "leaderboard"]
         ],

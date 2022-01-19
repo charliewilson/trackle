@@ -212,13 +212,13 @@ hr {
   border-style: hidden;
 }
 
-.leaderboard-container table tbody tr:nth-child(1) {
+.leaderboard-container table tbody tr.gold {
   background-color:var(--leaderboard-gold);
 }
-.leaderboard-container table tbody tr:nth-child(2) {
+.leaderboard-container table tbody tr.silver {
   background-color:var(--leaderboard-silver);
 }
-.leaderboard-container table tbody tr:nth-child(3) {
+.leaderboard-container table tbody tr.bronze {
   background-color:var(--leaderboard-bronze);
 }
 

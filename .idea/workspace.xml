@@ -4,10 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bf6f46f9-f080-4974-a29a-93b52a10bac6" name="Changes" comment="Fixed icon not showing and added ':' discord bug `str_replace`">
+    <list default="true" id="bf6f46f9-f080-4974-a29a-93b52a10bac6" name="Changes" comment="per-result leaderboard with transport">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/controllers/page.controller.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/page.controller.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/person/person.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/person/person.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/leaderboard/leaderboard.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/leaderboard/leaderboard.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/style.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,7 +71,7 @@
     <property name="WebServerToolWindowPanel.toolwindow.show.date" value="false" />
     <property name="WebServerToolWindowPanel.toolwindow.show.permissions" value="false" />
     <property name="WebServerToolWindowPanel.toolwindow.show.size" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/views/settings" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../qa" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -83,6 +84,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="\\wsl$\Ubuntu\var\www\trackle\app\views\leaderboard" />
       <recent name="$PROJECT_DIR$/app/views/settings" />
       <recent name="$PROJECT_DIR$/app/views/login" />
       <recent name="$PROJECT_DIR$/app/views" />
@@ -119,6 +121,7 @@
       <workItem from="1642242366658" duration="614000" />
       <workItem from="1642323452444" duration="32942000" />
       <workItem from="1642443187721" duration="11117000" />
+      <workItem from="1642593121167" duration="633000" />
     </task>
     <task id="LOCAL-00001" summary="Cloned from ledge.club">
       <created>1641901299367</created>
@@ -218,7 +221,49 @@
       <option name="project" value="LOCAL" />
       <updated>1642506345663</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Graph axis/reporting fixed">
+      <created>1642511222578</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1642511222578</updated>
+    </task>
+    <task id="LOCAL-00016" summary="stats moved to `person` object method `stats()`&#10;&#10;- fixed 'total won' bug showing incorrectly.">
+      <created>1642514349750</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1642514349750</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Lost puzzles now show as red dots on graph">
+      <created>1642514818190</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1642514818190</updated>
+    </task>
+    <task id="LOCAL-00018" summary="Rudimentary leaderboard implemented">
+      <created>1642520210177</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1642520210177</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Reduced navbar button font size for mobile">
+      <created>1642521299386</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1642521299386</updated>
+    </task>
+    <task id="LOCAL-00020" summary="per-result leaderboard with transport">
+      <created>1642524688148</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1642524688148</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -262,6 +307,12 @@
     <MESSAGE value="Fixed discord shortcode copying bug on android" />
     <MESSAGE value="ACTUALLY fixed discord bug this time lmao" />
     <MESSAGE value="Fixed icon not showing and added ':' discord bug `str_replace`" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed icon not showing and added ':' discord bug `str_replace`" />
+    <MESSAGE value="Graph axis/reporting fixed" />
+    <MESSAGE value="stats moved to `person` object method `stats()`&#10;&#10;- fixed 'total won' bug showing incorrectly." />
+    <MESSAGE value="Lost puzzles now show as red dots on graph" />
+    <MESSAGE value="Rudimentary leaderboard implemented" />
+    <MESSAGE value="Reduced navbar button font size for mobile" />
+    <MESSAGE value="per-result leaderboard with transport" />
+    <option name="LAST_COMMIT_MESSAGE" value="per-result leaderboard with transport" />
   </component>
 </project>
