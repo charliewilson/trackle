@@ -54,7 +54,7 @@ class App {
     $this->twig->addExtension(new IntlExtension());
 //    $this->auth = new Auth($this->db);
     $this->auth = new Auth($this->db,$_SERVER['REMOTE_ADDR'],"",false);
-    $this->user = new User($this->db);
+    $this->user = new User($this->db, $this->auth);
     $this->appData = new appData;
     
     $this->pageController = new PageController($this);
@@ -88,30 +88,93 @@ class AppData {
 class User {
 
   private PDO $db;
+  private Auth $auth;
 
-  function __construct(PDO $db) {
+  function __construct(PDO $db, Auth $auth) {
     $this->db = $db;
+    $this->auth = $auth;
   }
 
   // Gets the full name from a user's email for use in adding comments etc.
-  public function getName($email) {
+  public function usesDarkMode($id = null): bool {
+
+    if ($id == null) {
+      $id = $this->auth->getUserId();
+    }
+
     try {
       $q = $this->db->prepare("
-        SELECT `name`
+        SELECT `data`
         FROM `users_data`
-        WHERE `email` = :email
+        WHERE `id` = :id
       ");
 
-      $q->execute([
-        ':email' => filter_var($email,FILTER_SANITIZE_EMAIL)
-      ]);
+       if (
+         $q->execute([
+          ':id' => filter_var($id,FILTER_SANITIZE_NUMBER_INT)
+        ])
+       ) {
+         $current = unserialize($q->fetch()['data'])['darkMode'];
 
-      if ($q) {
-        return ($q->fetch()['name']);
+         if (!$current) {
+           $current = false;
+         } else {
+           $current = true;
+         }
+
+         return $current;
+       } else {
+         return false;
+       }
+
+    } catch (Exception) {
+      return false;
+    }
+  }
+
+  public function setDarkMode(bool $bool, $id = null): bool {
+
+    if ($id == null) {
+      $id = $this->auth->getUserId();
+    }
+
+    try {
+      $q = $this->db->prepare("
+        SELECT `data`
+        FROM `users_data`
+        WHERE `id` = :id
+      ");
+
+      if (
+        $q->execute([
+          ':id' => filter_var($id,FILTER_SANITIZE_NUMBER_INT)
+        ])
+      ) {
+
+        $existing = unserialize($q->fetch()['data']);
+        $existing["darkMode"] = ($bool) ? 1 : 0;
+
+        $q2 = $this->db->prepare("
+          UPDATE `users_data`
+          SET `existing` = :serialized
+          WHERE `id` = :id
+        ");
+
+        if (
+          $q2->execute([
+            ':serialized' => serialize($existing),
+            ':id' => filter_var($id,FILTER_SANITIZE_NUMBER_INT)
+          ])
+        ){
+          return true;
+        } else {
+          return false;
+        }
       } else {
         return false;
       }
-    } catch (Exception $e) {
+
+    } catch (Exception) {
       return false;
     }
   }

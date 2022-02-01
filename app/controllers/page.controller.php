@@ -38,7 +38,8 @@ class PageController {
     try {
       echo $this->app->twig->render('error.twig', [
         "message" => $message,
-        "appData" => $this->app->appData->get()
+        "appData" => $this->app->appData->get(),
+        "darkMode" => $this->app->user->usesDarkMode()
       ]);
     } catch (LoaderError | RuntimeError | SyntaxError) {
       die("an unknown error occurred, please try again later");
@@ -50,7 +51,8 @@ class PageController {
     header( $_SERVER["SERVER_PROTOCOL"] . ' 404 Not Found');
     try {
       echo $this->app->twig->render('404.twig', [
-        "appData" => $this->app->appData->get()
+        "appData" => $this->app->appData->get(),
+        "darkMode" => $this->app->user->usesDarkMode()
       ]);
     } catch (LoaderError | RuntimeError | SyntaxError $e) {
       $this->errorMessage($e->getMessage());
@@ -62,7 +64,8 @@ class PageController {
     header( $_SERVER["SERVER_PROTOCOL"] . ' 503 Service Unavailable');
     try {
       echo $this->app->twig->render('/misc/maintenance.twig', [
-        "appData" => $this->app->appData->get()
+        "appData" => $this->app->appData->get(),
+        "darkMode" => $this->app->user->usesDarkMode()
       ]);
     } catch (LoaderError | RuntimeError | SyntaxError $e) {
       $this->errorMessage($e->getMessage());
@@ -93,7 +96,8 @@ class PageController {
         }
 
         echo $this->app->twig->render('login/login.twig',[
-          "message" => $message
+          "message" => $message,
+          "darkMode" => $this->app->user->usesDarkMode()
         ]);
 
       } catch (LoaderError | RuntimeError | SyntaxError $e) {
@@ -161,7 +165,8 @@ class PageController {
         }
 
         echo $this->app->twig->render('login/register.twig',[
-          "message" => $message
+          "message" => $message,
+          "darkMode" => $this->app->user->usesDarkMode()
         ]);
 
       } catch (LoaderError | RuntimeError | SyntaxError $e) {
@@ -331,6 +336,7 @@ class PageController {
         "results" => $results,
         "graphData" => $graphData,
         "stats" => $person->stats(),
+        "darkMode" => $this->app->user->usesDarkMode(),
         "breadcrumb" => [
           ["link" => false, "display" => $person->username()]
         ],
@@ -373,6 +379,7 @@ class PageController {
         "result" => $result,
         "next" => $next,
         "previous" => $previous,
+        "darkMode" => $this->app->user->usesDarkMode(),
         "breadcrumb" => [
           ["link" => "/u/" . $result->user()->username(), "display" => $result->user()->username()],
           ["link" => false, "display" => $result->puzzleNo()]
@@ -423,6 +430,7 @@ class PageController {
         echo $this->app->twig->render('results/addresult.twig',[
           "me" => $me,
           "message" => $message,
+          "darkMode" => $this->app->user->usesDarkMode(),
           "breadcrumb" => [
             ["link" => "/u/" . $me->username(), "display" => $me->username()],
             ["link" => false, "display" => "add"]
@@ -489,6 +497,7 @@ class PageController {
           "silver" => $topthree[1],
           "bronze" => $topthree[2]
         ],
+        "darkMode" => $this->app->user->usesDarkMode(),
         "breadcrumb" => [
           ["link" => false, "display" => "leaderboard"]
         ],
@@ -529,6 +538,7 @@ class PageController {
         echo $this->app->twig->render('settings/settings.twig', [
           "me" => $me,
           "message" => $message,
+          "darkMode" => $this->app->user->usesDarkMode(),
           "breadcrumb" => [
             ["link" => "/u/".$me->username(), "display" => $me->username()],
             ["link" => false, "display" => "settings"]
@@ -540,6 +550,16 @@ class PageController {
       die();
     } else {
       header("Location: /login");
+    }
+  }
+
+  public function toggleDarkModeGet() {
+    if (!$this->app->auth->isLoggedIn()) {
+      header("Location: /");
+    } else {
+      $current = $this->app->user->usesDarkMode();
+      $this->app->user->setDarkMode(!$current);
+      header("Location: /settings?tdm");
     }
   }
 
@@ -561,6 +581,7 @@ class PageController {
         echo $this->app->twig->render('settings/delete_account.twig', [
           "me" => $me,
           "message" => $message,
+          "darkMode" => $this->app->user->usesDarkMode(),
           "breadcrumb" => [
             ["link" => "/u/".$me->username(), "display" => $me->username()],
             ["link" => false, "display" => "settings"]

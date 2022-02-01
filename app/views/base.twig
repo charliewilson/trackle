@@ -5,7 +5,12 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1">
   <title>{{ title ? title|raw : 'Page'}} | trackle</title>
-  <link rel="stylesheet" href="/assets/css/style.css" />
+  {% if darkMode %}
+  <link rel="stylesheet" href="/assets/css/dark_vars.css"?{{ random(9999) }} />
+  {% else %}
+  <link rel="stylesheet" href="/assets/css/light_vars.css?{{ random(9999) }}" />
+  {% endif %}
+  <link rel="stylesheet" href="/assets/css/style.css?{{ random(9999) }}" />
   <link href="/assets/img/icon.png" rel="icon shortcut" sizes="144144" />
   <link href="/assets/img/icon.png" rel="apple-touch-icon" />
   <meta name="apple-mobile-web-app-title" content="trackle">

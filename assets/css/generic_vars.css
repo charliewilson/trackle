@@ -1,0 +1,15 @@
+:root {
+  --border-colour: #d3d6da;
+  --tile-green: #78b158;
+  --tile-yellow: #f1ad10;
+
+  --leaderboard-gold: rgba(255, 195, 74, 0.5);
+  --leaderboard-silver: rgba(204, 204, 204, 0.5);
+  --leaderboard-bronze: rgba(193, 126, 77, 0.5);
+
+  --color-light: #FFF;
+  --color-dark: #000;
+
+  --message: #FFCCD1;
+  --danger: #a80000;
+}

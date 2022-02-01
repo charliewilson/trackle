@@ -1,16 +1,7 @@
+@import "generic_vars.css";
+
 :root {
-  --border-colour: #d3d6da;
-  --tile-green: #78b158;
-  --tile-yellow: #f1ad10;
-  --tile-black: #202225;
-  --tile-clear: #ddd;
-
-  --leaderboard-gold: rgba(255, 195, 74, 0.5);
-  --leaderboard-silver: rgba(204, 204, 204, 0.5);
-  --leaderboard-bronze: rgba(193, 126, 77, 0.5);
-
   --leaderboard-highlight: var(--border-colour);
-
   --card-radius: 4px;
   --tile-radius: 4px;
   --shadow: 3px 3px 3px rgba(0,0,0,0.1);
@@ -19,6 +10,8 @@
 body {
   Font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
   margin: 20px;
+  background: var(--background);
+  color: var(--color);
 }
 
 a {
@@ -81,7 +74,7 @@ header .button:last-of-type {
 }
 
 .message {
-  background: #FFCCD1;
+  background: var(--message);
   text-align:center;
   padding:10px;
   border-radius: var(--card-radius);
@@ -137,7 +130,8 @@ hr {
   border-radius: var(--card-radius);
   padding:10px;
   box-sizing:border-box;
-  background:#FFF;
+  background:var(--background);
+  color:var(--color);
 }
 
 .container.login .login-form input[type='text'],
@@ -187,9 +181,9 @@ hr {
   border-radius: var(--card-radius);
   transition:transform .1s, box-shadow .1s;
   display:inline-block;
-  background:#FFF;
+  background:var(--background);
   -webkit-appearance: none;
-  color:#000;
+  color:var(--color);
 }
 
 .button:hover {
@@ -198,7 +192,7 @@ hr {
 }
 
 .button.deletebutton {
-  color: #a80000;
+  color: var(--danger);
 }
 
 .leaderboard-container {
@@ -224,7 +218,7 @@ hr {
 
 .leaderboard-container table a {
   font-weight:bold;
-  color:#000000;
+  color:var(--color);
 }
 
 /*.leaderboard-container table,*/
@@ -274,7 +268,7 @@ hr {
 
 .graph-container .stats .row span:last-child {
   font-size:16px;
-  color: #555;
+  color: var(--color-muted);
   font-style: italic;
 }
 
@@ -384,10 +378,8 @@ hr {
 .add-result-help {
   flex:1;
   box-sizing: border-box;
-  padding: 20px;
   border: 2px solid var(--border-colour);
   border-radius: var(--card-radius);
-
   display:flex;
   flex-direction: column;
   padding:0;
@@ -396,7 +388,7 @@ hr {
 .result-leaderboard .header,
 .add-result-help .header {
   background: var(--border-colour);
-  color: var(--tile-black);
+  color: var(--color-dark);
   flex:none;
   padding:10px;
   text-align:center;
@@ -419,6 +411,7 @@ hr {
 
 .result-leaderboard .inner a .result-leaderboard-line.self {
   background-color:var(--leaderboard-highlight);
+  color:var(--color-dark);
 }
 
 .result-leaderboard .inner a {
@@ -432,14 +425,18 @@ hr {
 
 .result-leaderboard .inner p {
   margin:0;
-  color:#000;
 }
 
 .add-result-help .inner p {
   margin-top:0;
 }
+
 .add-result-help .inner p:last-child {
   margin-bottom:0;
+}
+
+.result-leaderboard .inner a .result-leaderboard-line.self {
+  color:var(--color-dark);
 }
 
 .result-pagination {
@@ -507,6 +504,8 @@ hr {
   box-sizing:border-box;
   height: 160px;
   resize: none;
+  background:var(--background);
+  color:var(--color);
 }
 
 .add-result-container .add-result-form input[type='submit'] {

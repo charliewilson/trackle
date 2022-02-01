@@ -5,10 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bf6f46f9-f080-4974-a29a-93b52a10bac6" name="Changes" comment="per-result leaderboard with transport">
+      <change afterPath="$PROJECT_DIR$/assets/css/dark_vars.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/css/generic_vars.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/css/light_vars.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/controllers/page.controller.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/page.controller.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/leaderboard/leaderboard.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/leaderboard/leaderboard.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/trackle.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/trackle.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/base.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/base.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/person/person.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/person/person.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/settings/settings.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/settings/settings.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,6 +26,13 @@
   <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
     <execution />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="CSS File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -71,7 +86,8 @@
     <property name="WebServerToolWindowPanel.toolwindow.show.date" value="false" />
     <property name="WebServerToolWindowPanel.toolwindow.show.permissions" value="false" />
     <property name="WebServerToolWindowPanel.toolwindow.show.size" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../qa" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/assets/css" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -84,6 +100,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/assets/css" />
       <recent name="\\wsl$\Ubuntu\var\www\trackle\app\views\leaderboard" />
       <recent name="$PROJECT_DIR$/app/views/settings" />
       <recent name="$PROJECT_DIR$/app/views/login" />
@@ -122,6 +139,7 @@
       <workItem from="1642323452444" duration="32942000" />
       <workItem from="1642443187721" duration="11117000" />
       <workItem from="1642593121167" duration="633000" />
+      <workItem from="1643727699888" duration="6240000" />
     </task>
     <task id="LOCAL-00001" summary="Cloned from ledge.club">
       <created>1641901299367</created>

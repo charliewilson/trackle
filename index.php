@@ -42,8 +42,9 @@ try {
     ['GET', '/settings', 'settingsGet'],
     ['POST', '/settings/email', 'changeEmailPost'],
     ['POST', '/settings/password', 'changePasswordPost'],
-     ['GET', '/settings/delete', 'deleteAccountGet'],
-     ['POST', '/settings/delete', 'deleteAccountPost'],
+    ['GET', '/settings/data/toggledark', 'toggleDarkModeGet'],
+    ['GET', '/settings/delete', 'deleteAccountGet'],
+    ['POST', '/settings/delete', 'deleteAccountPost'],
   ]);
   
 } catch (Exception $e) {
