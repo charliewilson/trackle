@@ -468,23 +468,31 @@ class PageController {
     }
   }
 
-  public function leaderboardGet() {
+  public function leaderboardGet($args) {
     try {
+
+//      die(print_r($sortby));
 
       $me = ($this->app->auth->isLoggedIn()) ? $this->app->personController->getMe() : false;
       $users = $this->app->personController->getall();
 
-      usort($users, function($a, $b) {
-        if ($a->stats()['average'] == $b->stats()['average']) {
+      $sortby = $args['sortby'] ?? 'average';
+
+      $sort = ($sortby == 'average' || $sortby == 'score') ? $sortby : 'average';
+
+      usort($users, function ($a, $b) use ($sort) {
+        if ($a->stats()[$sort] == $b->stats()[$sort]) {
           return 0;
         }
-        return ($a->stats()['average'] > $b->stats()['average']) ? +1 : -1;
+        return ($sort == 'average') ?
+          (($a->stats()[$sort] > $b->stats()[$sort]) ? +1 : -1) :
+          (($a->stats()[$sort] < $b->stats()[$sort]) ? +1 : -1);
       });
 
       $topthree = [];
 
       foreach ($users as $user) {
-        $topthree[] = $user->stats()['average'];
+        $topthree[] = $user->stats()[$sort];
       }
 
       $topthree = array_values(array_unique($topthree));
@@ -492,6 +500,7 @@ class PageController {
       echo $this->app->twig->render('leaderboard/leaderboard.twig', [
         "me" => $me,
         "people" => $users,
+        "sort" => $sort,
         "awards" => [
           "gold" => $topthree[0],
           "silver" => $topthree[1],

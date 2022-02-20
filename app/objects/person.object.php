@@ -54,12 +54,14 @@ class Person {
     $won = 0;
     $played = 0;
     $sum = 0;
+    $score = 0;
 
     foreach (array_reverse($this->results()) as $result) {
       $played += 1;
       if ($result->guessesNo() != "X") {
         $won += 1;
         $sum += $result->guessesNo();
+        $score += (7 - $result->guessesNo());
       } else {
         $sum += 7;
       }
@@ -77,12 +79,19 @@ class Person {
       $average = number_format(round($sum / $played, 2), 2, '.','');
     }
 
+    /*
+     * TrackleScore is the difference between the guesses and '7' for each result played. I.e. 3 separate daily guesses
+     * of '3' would give a someone a TrackleScore of '12'. This means the more people play, the greater the score.
+     *  also stops people getting a good average guess with only 10 or so played and then never playing again.
+     */
+
     return [
       "won" => $won,
       "played" => $played,
       "winrate" => $winrate,
       "total" => $sum,
-      "average" => $average
+      "average" => $average,
+      "score" => $score
     ];
 
   }

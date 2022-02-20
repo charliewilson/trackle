@@ -5,17 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bf6f46f9-f080-4974-a29a-93b52a10bac6" name="Changes" comment="per-result leaderboard with transport">
-      <change afterPath="$PROJECT_DIR$/assets/css/dark_vars.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/css/generic_vars.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/css/light_vars.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/deployment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/deployment.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/controllers/page.controller.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/page.controller.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/objects/person.object.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/objects/person.object.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/trackle.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/trackle.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/base.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/base.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/person/person.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/person/person.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/leaderboard/leaderboard.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/leaderboard/leaderboard.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/views/settings/settings.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/settings/settings.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/current.sql" beforeDir="false" afterPath="$PROJECT_DIR$/current.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -140,6 +138,7 @@
       <workItem from="1642443187721" duration="11117000" />
       <workItem from="1642593121167" duration="633000" />
       <workItem from="1643727699888" duration="6240000" />
+      <workItem from="1645371296815" duration="1587000" />
     </task>
     <task id="LOCAL-00001" summary="Cloned from ledge.club">
       <created>1641901299367</created>
@@ -298,7 +297,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="main" />
+                        <option value="origin/main" />
                       </list>
                     </value>
                   </entry>

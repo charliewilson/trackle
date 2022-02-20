@@ -114,7 +114,9 @@ class User {
           ':id' => filter_var($id,FILTER_SANITIZE_NUMBER_INT)
         ])
        ) {
-         $current = unserialize($q->fetch()['data'])['darkMode'];
+         $fetch = $q->fetch();
+         $data = isset($fetch['data']) ? unserialize($fetch['data']) : [];
+         $current = $data['darkMode'] ?? false;
 
          if (!$current) {
            $current = false;

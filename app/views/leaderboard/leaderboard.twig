@@ -6,7 +6,14 @@
 {% endblock %}
 
 {% block main %}
-  <div class="leaderboard-container grey-box centered-container">
+<div class="centered-container">
+  <div class="sort-dropdown-container">
+    <div class="button-group">
+      <a href="/leaderboard/average" class="button {% if sort == 'average' %}active{% endif %}">Sort by Avg. Guess</a><a href="/leaderboard/score" class="button {% if sort == 'score' %}active{% endif %}">Sort by Score</a>
+    </div>
+  </div>
+
+  <div class="leaderboard-container grey-box">
     <table>
       <thead>
         <tr>
@@ -14,20 +21,29 @@
           <th>Avg. Guess</th>
           <th>Total Won</th>
           <th>Total Played</th>
+          <th>Score <abbr title="Each result is given a 'Score', calculated as 7 - No. of guesses. I.e. 3 separate daily guesses of '3' would give a someone a Score of '12'.">(?)</abbr></th>
           <th>Win Rate</th>
         </tr>
       </thead>
       <tbody>
       {% for person in people %}
-        <tr class="{% if person.stats.average == awards.gold %}gold{% elseif person.stats.average == awards.silver %}silver{% elseif person.stats.average == awards.bronze %}bronze{% endif %}">
+        {% if sort == "average" %}
+          {% set metric = person.stats.average %}
+        {% elseif sort == "score" %}
+          {% set metric = person.stats.score %}
+        {% endif %}
+        <tr class="{% if metric == awards.gold %}gold{% elseif metric == awards.silver %}silver{% elseif metric == awards.bronze %}bronze{% endif %}">
           <td><a href="/u/{{ person.username }}">{{ person.username }}</a></td>
           <td>{{ person.stats.average }}</td>
           <td>{{ person.stats.won }}</td>
           <td>{{ person.stats.played }}</td>
+          <td>{{ person.stats.score }}</td>
           <td>{{ person.stats.winrate }}%</td>
         </tr>
       {% endfor %}
       </tbody>
     </table>
   </div>
+
+</div>
 {% endblock %}

@@ -38,6 +38,7 @@ try {
     ['GET', '/u/[a:name]/[i:puzzleno]/delete', 'resultDeleteGet'],
     //Leaderboard
     ['GET', '/leaderboard', 'leaderboardGet'],
+    ['GET', '/leaderboard/[average|score:sortby]', 'leaderboardGet'],
     //Settings
     ['GET', '/settings', 'settingsGet'],
     ['POST', '/settings/email', 'changeEmailPost'],
