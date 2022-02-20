@@ -19,10 +19,8 @@
         <tr>
           <th>User</th>
           <th>Avg. Guess</th>
-          <th>Total Won</th>
-          <th>Total Played</th>
+          <th>Won / Played</th>
           <th>Score <abbr title="Each result is given a 'Score', calculated as 7 - No. of guesses. I.e. 3 separate daily guesses of '3' would give a someone a Score of '12'.">(?)</abbr></th>
-          <th>Win Rate</th>
         </tr>
       </thead>
       <tbody>
@@ -35,10 +33,8 @@
         <tr class="{% if metric == awards.gold %}gold{% elseif metric == awards.silver %}silver{% elseif metric == awards.bronze %}bronze{% endif %}">
           <td><a href="/u/{{ person.username }}">{{ person.username }}</a></td>
           <td>{{ person.stats.average }}</td>
-          <td>{{ person.stats.won }}</td>
-          <td>{{ person.stats.played }}</td>
+          <td>{{ person.stats.won }} / {{ person.stats.played }} ({{ person.stats.winrate }}%)</td>
           <td>{{ person.stats.score }}</td>
-          <td>{{ person.stats.winrate }}%</td>
         </tr>
       {% endfor %}
       </tbody>
