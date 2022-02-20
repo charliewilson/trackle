@@ -216,6 +216,12 @@ hr {
   background: var(--border-colour);
 }
 
+@media (max-width: 650px) {
+  .button-group .button {
+    font-size: 13px;
+  }
+}
+
 /* Leaderboard */
 
 abbr:hover {
